@@ -13,6 +13,7 @@ import java.util.Objects;
 import org.sonatype.goodies.packageurl.PackageUrl;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.google.common.base.MoreObjects;
 import io.swagger.annotations.ApiModel;
 
 /**
@@ -95,9 +96,9 @@ public class ComponentReport
 
   @Override
   public String toString() {
-    return "ComponentReport{" +
-        "coordinates=" + coordinates +
-        ", description='" + description + '\'' +
-        '}';
+    return MoreObjects.toStringHelper(this)
+        .add("coordinates", coordinates)
+        .add("description", description)
+        .toString();
   }
 }

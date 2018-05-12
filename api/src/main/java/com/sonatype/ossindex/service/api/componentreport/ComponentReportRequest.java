@@ -12,6 +12,7 @@ import java.util.Objects;
 import org.sonatype.goodies.packageurl.PackageUrl;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.google.common.base.MoreObjects;
 import io.swagger.annotations.ApiModel;
 
 /**
@@ -41,12 +42,12 @@ public class ComponentReportRequest
 
   @Override
   public boolean equals(Object o) {
-      if (this == o) {
-          return true;
-      }
-      if (o == null || getClass() != o.getClass()) {
-          return false;
-      }
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
     ComponentReportRequest that = (ComponentReportRequest) o;
     return Objects.equals(coordinates, that.coordinates);
   }
@@ -58,8 +59,8 @@ public class ComponentReportRequest
 
   @Override
   public String toString() {
-    return "ComponentReportRequest{" +
-        "coordinates=" + coordinates +
-        '}';
+    return MoreObjects.toStringHelper(this)
+        .add("coordinates", coordinates)
+        .toString();
   }
 }

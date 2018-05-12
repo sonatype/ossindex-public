@@ -14,31 +14,31 @@ import java.net.URI;
  */
 public interface Transport
 {
-    /**
-     * Perform HTTP POST request.
-     */
-    String post(URI url, String payloadType, String payload, String acceptType) throws TransportException, IOException;
+  /**
+   * Perform HTTP POST request.
+   */
+  String post(URI url, String payloadType, String payload, String acceptType) throws TransportException, IOException;
 
-    /**
-     * Thrown in case of non-{@link IOException} failure.
-     */
-    class TransportException
-        extends Exception
-    {
-        public TransportException() {
-            // empty
-        }
-
-        public TransportException(final String message) {
-            super(message);
-        }
-
-        public TransportException(final String message, final Throwable cause) {
-            super(message, cause);
-        }
-
-        public TransportException(final Throwable cause) {
-            super(cause);
-        }
+  /**
+   * Thrown in case of non-{@link IOException} failure.
+   */
+  class TransportException
+      extends Exception
+  {
+    public TransportException() {
+      // empty
     }
+
+    public TransportException(final String message) {
+      super(message);
+    }
+
+    public TransportException(final String message, final Throwable cause) {
+      super(message, cause);
+    }
+
+    public TransportException(final Throwable cause) {
+      super(cause);
+    }
+  }
 }

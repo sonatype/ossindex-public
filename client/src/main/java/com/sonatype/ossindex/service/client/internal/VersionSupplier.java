@@ -14,13 +14,13 @@ import com.google.common.base.Supplier;
 public class VersionSupplier
     implements Supplier<Version>
 {
-    private static volatile Version instance;
+  private static volatile Version instance;
 
-    @Override
-    public Version get() {
-        if (instance == null) {
-            instance = new Version(VersionSupplier.class);
-        }
-        return instance;
+  @Override
+  public Version get() {
+    if (instance == null) {
+      instance = new Version(VersionSupplier.class);
     }
+    return instance;
+  }
 }

@@ -4,11 +4,12 @@
  */
 package com.sonatype.ossindex.service.client;
 
-import com.sonatype.ossindex.service.api.componentreport.ComponentReport;
-import org.sonatype.goodies.packageurl.PackageUrl;
-
 import java.util.List;
 import java.util.Map;
+
+import com.sonatype.ossindex.service.api.componentreport.ComponentReport;
+
+import org.sonatype.goodies.packageurl.PackageUrl;
 
 /**
  * Sonatype OSS Index client.
@@ -17,13 +18,13 @@ import java.util.Map;
  */
 public interface OssindexClient
 {
-    /**
-     * Request component reports for coordinates.
-     */
-    Map<PackageUrl,ComponentReport> requestComponentReports(List<PackageUrl> coordinates) throws Exception;
+  /**
+   * Request component reports for coordinates.
+   */
+  Map<PackageUrl, ComponentReport> requestComponentReports(List<PackageUrl> coordinates) throws Exception;
 
-    /**
-     * Request component report for coordinates.
-     */
-    ComponentReport requestComponentReport(PackageUrl coordinates) throws Exception;
+  /**
+   * Request component report for coordinates.
+   */
+  ComponentReport requestComponentReport(PackageUrl coordinates) throws Exception;
 }
