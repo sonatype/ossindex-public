@@ -14,18 +14,20 @@ import org.sonatype.goodies.packageurl.PackageUrl;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.base.MoreObjects;
 import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 /**
  * {@link ComponentReport} request.
  *
  * @since ???
  */
-@ApiModel(description = "Component-report request")
+@ApiModel(description = "Component vulnerability report request")
 public class ComponentReportRequest
     implements Serializable
 {
   private static final long serialVersionUID = 1L;
 
+  @ApiModelProperty(value = "One or more component coordinates as package-url", required = true)
   @JsonProperty
   private List<PackageUrl> coordinates;
 

@@ -98,7 +98,7 @@ public class OssindexClientImpl
     log.debug("Requesting {} component-reports", coordinates.size());
     Stopwatch watch = Stopwatch.createStarted();
 
-    Map<PackageUrl, ComponentReport> result = new LinkedHashMap<>();
+    Map<PackageUrl, ComponentReport> results = new LinkedHashMap<>();
 
     // resolve cached reports and generate list of un-cached requests
     List<PackageUrl> uncached = new LinkedList<>();
@@ -106,7 +106,7 @@ public class OssindexClientImpl
       ComponentReport report = reportCache.getIfPresent(purl);
       if (report != null) {
         log.debug("Found cached report for: {}", purl);
-        result.put(purl, report);
+        results.put(purl, report);
       }
       else {
         uncached.add(purl);
@@ -125,15 +125,15 @@ public class OssindexClientImpl
         if (batch.size() == batchSize || !iter.hasNext()) {
           Map<PackageUrl, ComponentReport> reports = doRequestComponentReports(batch);
           reportCache.putAll(reports);
-          result.putAll(reports);
+          results.putAll(reports);
           batch.clear();
         }
       }
     }
 
-    log.debug("{} component-reports; {}", result.size(), watch);
+    log.debug("{} component-reports; {}", results.size(), watch);
 
-    return result;
+    return results;
   }
 
   private static final TypeToken<List<ComponentReport>> LIST_COMPONENT_REPORT = new TypeToken<List<ComponentReport>>() { };
@@ -154,20 +154,20 @@ public class OssindexClientImpl
     checkState(reports.size() == coordinates.size(), "Result size mismatch; expected: %s, have: %s", coordinates.size(),
         reports.size());
 
-    Map<PackageUrl, ComponentReport> result = new LinkedHashMap<>();
+    Map<PackageUrl, ComponentReport> results = new LinkedHashMap<>();
     int i = 0;
     for (PackageUrl purl : coordinates) {
-      result.put(purl, reports.get(i++));
+      results.put(purl, reports.get(i++));
     }
-    return result;
+    return results;
   }
 
   @Override
   public ComponentReport requestComponentReport(final PackageUrl coordinates) throws Exception {
     checkNotNull(coordinates);
     Map<PackageUrl, ComponentReport> reports = requestComponentReports(Collections.singletonList(coordinates));
-    ComponentReport report = reports.get(coordinates);
-    checkState(report != null);
-    return report;
+    ComponentReport result = reports.get(coordinates);
+    checkState(result != null);
+    return result;
   }
 }

@@ -15,27 +15,32 @@ import org.sonatype.goodies.packageurl.PackageUrl;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.base.MoreObjects;
 import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 /**
  * Component report.
  *
  * @since ???
  */
-@ApiModel(description = "Component-report")
+@ApiModel(description = "Component vulnerability report")
 public class ComponentReport
     implements Serializable
 {
   private static final long serialVersionUID = 1L;
 
+  @ApiModelProperty("Component coordinates as package-url")
   @JsonProperty
   private PackageUrl coordinates;
 
+  @ApiModelProperty("Component description")
   @JsonProperty
   private String description;
 
+  @ApiModelProperty("Component details reference")
   @JsonProperty
   private URI reference;
 
+  @ApiModelProperty("Vulnerabilities recorded for component")
   @JsonProperty
   private List<ComponentReportVulnerability> vulnerabilities;
 
