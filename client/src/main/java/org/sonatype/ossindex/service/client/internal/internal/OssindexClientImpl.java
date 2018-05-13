@@ -10,7 +10,7 @@
  * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the Apache License Version 2.0 for the specific language governing permissions and limitations there under.
  */
-package com.sonatype.ossindex.service.client.internal;
+package org.sonatype.ossindex.service.client.internal.internal;
 
 import java.net.URI;
 import java.util.ArrayList;
@@ -21,12 +21,12 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import com.sonatype.ossindex.service.api.componentreport.ComponentReport;
-import com.sonatype.ossindex.service.api.componentreport.ComponentReportRequest;
-import com.sonatype.ossindex.service.client.OssindexClient;
-import com.sonatype.ossindex.service.client.OssindexClientConfiguration;
-import com.sonatype.ossindex.service.client.transport.Marshaller;
-import com.sonatype.ossindex.service.client.transport.Transport;
+import org.sonatype.ossindex.service.api.componentreport.ComponentReport;
+import org.sonatype.ossindex.service.api.componentreport.ComponentReportRequest;
+import org.sonatype.ossindex.service.client.internal.OssindexClient;
+import org.sonatype.ossindex.service.client.internal.OssindexClientConfiguration;
+import org.sonatype.ossindex.service.client.internal.transport.Marshaller;
+import org.sonatype.ossindex.service.client.internal.transport.Transport;
 
 import org.sonatype.goodies.packageurl.PackageUrl;
 
@@ -40,8 +40,8 @@ import org.slf4j.LoggerFactory;
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.base.Preconditions.checkState;
-import static com.sonatype.ossindex.service.api.componentreport.ComponentReportMediaTypes.REPORT_V1_JSON;
-import static com.sonatype.ossindex.service.api.componentreport.ComponentReportMediaTypes.REQUEST_V1_JSON;
+import static org.sonatype.ossindex.service.api.componentreport.ComponentReportMediaTypes.REPORT_V1_JSON;
+import static org.sonatype.ossindex.service.api.componentreport.ComponentReportMediaTypes.REQUEST_V1_JSON;
 
 /**
  * Default {@link OssindexClient}.

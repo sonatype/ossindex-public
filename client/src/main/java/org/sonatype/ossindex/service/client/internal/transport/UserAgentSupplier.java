@@ -10,9 +10,9 @@
  * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the Apache License Version 2.0 for the specific language governing permissions and limitations there under.
  */
-package com.sonatype.ossindex.service.client.transport;
+package org.sonatype.ossindex.service.client.internal.transport;
 
-import com.sonatype.ossindex.service.client.internal.Version;
+import org.sonatype.ossindex.service.client.internal.internal.Version;
 
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.Supplier;

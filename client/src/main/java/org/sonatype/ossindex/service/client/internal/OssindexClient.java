@@ -10,25 +10,29 @@
  * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the Apache License Version 2.0 for the specific language governing permissions and limitations there under.
  */
-package com.sonatype.ossindex.service.client.internal;
+package org.sonatype.ossindex.service.client.internal;
 
-import com.google.common.base.Supplier;
+import java.util.List;
+import java.util.Map;
+
+import org.sonatype.ossindex.service.api.componentreport.ComponentReport;
+
+import org.sonatype.goodies.packageurl.PackageUrl;
 
 /**
- * {@link Version} supplier.
+ * Sonatype OSS Index client.
  *
  * @since ???
  */
-public class VersionSupplier
-    implements Supplier<Version>
+public interface OssindexClient
 {
-  private static volatile Version instance;
+  /**
+   * Request component reports for coordinates.
+   */
+  Map<PackageUrl, ComponentReport> requestComponentReports(List<PackageUrl> coordinates) throws Exception;
 
-  @Override
-  public Version get() {
-    if (instance == null) {
-      instance = new Version(VersionSupplier.class);
-    }
-    return instance;
-  }
+  /**
+   * Request component report for coordinates.
+   */
+  ComponentReport requestComponentReport(PackageUrl coordinates) throws Exception;
 }
