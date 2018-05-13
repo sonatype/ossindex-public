@@ -301,14 +301,15 @@
       <dependency>
         <groupId>com.sonatype.ossindex</groupId>
         <artifactId>ossindex-service-assembly</artifactId>
+        <type>jar</type>
         <version>1-SNAPSHOT</version>
       </dependency>
 
       <dependency>
         <groupId>com.sonatype.ossindex</groupId>
         <artifactId>ossindex-service-assembly</artifactId>
-        <version>1-SNAPSHOT</version>
         <type>zip</type>
+        <version>1-SNAPSHOT</version>
       </dependency>
     </dependencies>
   </dependencyManagement>

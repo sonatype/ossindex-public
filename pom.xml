@@ -48,6 +48,7 @@
     <module>core</module>
     <module>client</module>
     <module>assembly</module>
+    <module>testsuite</module>
   </modules>
 
   <build>

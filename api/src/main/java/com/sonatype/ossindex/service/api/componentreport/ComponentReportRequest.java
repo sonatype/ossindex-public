@@ -31,6 +31,14 @@ public class ComponentReportRequest
   @JsonProperty
   private List<PackageUrl> coordinates;
 
+  public ComponentReportRequest(final List<PackageUrl> coordinates) {
+    this.coordinates = coordinates;
+  }
+
+  public ComponentReportRequest() {
+    // empty
+  }
+
   public List<PackageUrl> getCoordinates() {
     if (coordinates == null) {
       coordinates = new ArrayList<>();
