@@ -10,7 +10,7 @@
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
-    <groupId>com.sonatype.ossindex</groupId>
+    <groupId>org.sonatype.ossindex</groupId>
     <artifactId>ossindex-service</artifactId>
     <version>1-SNAPSHOT</version>
   </parent>
@@ -19,15 +19,10 @@
   <name>${project.groupId}:${project.artifactId}</name>
   <packaging>jar</packaging>
 
-  <properties>
-    <maven.compiler.source>1.7</maven.compiler.source>
-    <maven.compiler.target>1.7</maven.compiler.target>
-  </properties>
-
   <dependencyManagement>
     <dependencies>
       <dependency>
-        <groupId>com.sonatype.ossindex</groupId>
+        <groupId>org.sonatype.ossindex</groupId>
         <artifactId>ossindex-service-bom</artifactId>
         <version>1-SNAPSHOT</version>
         <type>pom</type>
@@ -38,7 +33,7 @@
 
   <dependencies>
     <dependency>
-      <groupId>com.sonatype.ossindex</groupId>
+      <groupId>org.sonatype.ossindex</groupId>
       <artifactId>ossindex-service-api</artifactId>
     </dependency>
 
@@ -115,46 +110,6 @@
 
   <build>
     <plugins>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-enforcer-plugin</artifactId>
-        <executions>
-          <execution>
-            <id>enforce-classfileformat</id>
-            <goals>
-              <goal>enforce</goal>
-            </goals>
-            <configuration>
-              <rules>
-                <byteCodeRule implementation="org.owasp.maven.enforcer.rule.ClassFileFormatRule">
-                  <supportedClassFileFormat>51</supportedClassFileFormat>
-                </byteCodeRule>
-              </rules>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
-
-      <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>animal-sniffer-maven-plugin</artifactId>
-        <configuration>
-          <signature>
-            <groupId>org.codehaus.mojo.signature</groupId>
-            <artifactId>java17</artifactId>
-            <version>1.0</version>
-          </signature>
-        </configuration>
-        <executions>
-          <execution>
-            <phase>test</phase>
-            <goals>
-              <goal>check</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
-
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-shade-plugin</artifactId>

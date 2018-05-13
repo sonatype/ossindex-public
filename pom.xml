@@ -10,12 +10,12 @@
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
-    <groupId>com.sonatype.buildsupport</groupId>
-    <artifactId>private-parent</artifactId>
+    <groupId>org.sonatype.buildsupport</groupId>
+    <artifactId>public-parent</artifactId>
     <version>13</version>
   </parent>
 
-  <groupId>com.sonatype.ossindex</groupId>
+  <groupId>org.sonatype.ossindex</groupId>
   <artifactId>ossindex-service</artifactId>
   <name>${project.groupId}:${project.artifactId}</name>
   <packaging>pom</packaging>
@@ -36,19 +36,14 @@
   </ciManagement>
 
   <properties>
-    <maven.compiler.source>1.8</maven.compiler.source>
-    <maven.compiler.target>1.8</maven.compiler.target>
+    <maven.compiler.source>1.7</maven.compiler.source>
+    <maven.compiler.target>1.7</maven.compiler.target>
   </properties>
 
   <modules>
     <module>bom</module>
-    <module>dropwizard</module>
-    <module>swagger</module>
     <module>api</module>
-    <module>core</module>
     <module>client</module>
-    <module>assembly</module>
-    <module>testsuite</module>
   </modules>
 
   <build>
@@ -56,12 +51,6 @@
 
     <pluginManagement>
       <plugins>
-        <plugin>
-          <groupId>ro.isdc.wro4j</groupId>
-          <artifactId>wro4j-maven-plugin</artifactId>
-          <version>1.8.0</version>
-        </plugin>
-
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-enforcer-plugin</artifactId>
@@ -93,7 +82,7 @@
                   <version>[3.3,)</version>
                 </requireMavenVersion>
                 <requireJavaVersion>
-                  <version>[1.8,)</version>
+                  <version>[1.7,)</version>
                 </requireJavaVersion>
               </rules>
             </configuration>
@@ -106,7 +95,7 @@
             <configuration>
               <rules>
                 <byteCodeRule implementation="org.owasp.maven.enforcer.rule.ClassFileFormatRule">
-                  <supportedClassFileFormat>52</supportedClassFileFormat>
+                  <supportedClassFileFormat>51</supportedClassFileFormat>
                 </byteCodeRule>
               </rules>
             </configuration>
@@ -120,7 +109,7 @@
         <configuration>
           <signature>
             <groupId>org.codehaus.mojo.signature</groupId>
-            <artifactId>java18</artifactId>
+            <artifactId>java17</artifactId>
             <version>1.0</version>
           </signature>
         </configuration>
@@ -170,6 +159,18 @@
   </build>
 
   <profiles>
+    <profile>
+      <id>include-private</id>
+      <activation>
+        <file>
+          <exists>private/pom.xml</exists>
+        </file>
+      </activation>
+      <modules>
+        <module>private</module>
+      </modules>
+    </profile>
+
     <profile>
       <id>it</id>
       <activation>
