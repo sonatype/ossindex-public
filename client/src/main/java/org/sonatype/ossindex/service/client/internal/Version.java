@@ -31,9 +31,12 @@ import static com.google.common.base.Preconditions.checkNotNull;
 @SuppressWarnings("Duplicates")
 public class Version
 {
+
   private static final Logger log = LoggerFactory.getLogger(Version.class);
 
   public static final String RESOURCE = "version.properties";
+
+  public static final String UNKNOWN = "unknown";
 
   private final Class owner;
 
@@ -72,11 +75,11 @@ public class Version
   }
 
   public String getVersion() {
-    return properties().getProperty("version", "unknown");
+    return properties().getProperty("version", UNKNOWN);
   }
 
   public String getTimestamp() {
-    return properties().getProperty("timestamp", "unknown");
+    return properties().getProperty("timestamp", UNKNOWN);
   }
 
   @Override
