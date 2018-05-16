@@ -10,29 +10,29 @@
  * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the Apache License Version 2.0 for the specific language governing permissions and limitations there under.
  */
-package org.sonatype.ossindex.service.client.internal.transport;
+package org.sonatype.ossindex.service.client;
 
-import com.google.common.reflect.TypeToken;
+import java.util.List;
+import java.util.Map;
+
+import org.sonatype.ossindex.service.api.componentreport.ComponentReport;
+
+import org.sonatype.goodies.packageurl.PackageUrl;
 
 /**
- * Object marshaller.
+ * Sonatype OSS Index client.
  *
  * @since ???
  */
-public interface Marshaller
+public interface OssindexClient
 {
   /**
-   * Marshal value to string.
+   * Request component reports for coordinates.
    */
-  String marshal(Object value);
+  Map<PackageUrl, ComponentReport> requestComponentReports(List<PackageUrl> coordinates) throws Exception;
 
   /**
-   * Unmarshal value for type.
+   * Request component report for coordinates.
    */
-  <T> T unmarshal(String value, Class<T> type);
-
-  /**
-   * Unmarshal value for type.
-   */
-  <T> T unmarshal(String value, TypeToken<T> type);
+  ComponentReport requestComponentReport(PackageUrl coordinates) throws Exception;
 }

@@ -10,7 +10,7 @@
  * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the Apache License Version 2.0 for the specific language governing permissions and limitations there under.
  */
-package org.sonatype.ossindex.service.client.internal.internal;
+package org.sonatype.ossindex.service.client.internal;
 
 import java.net.URI;
 import java.util.ArrayList;
@@ -23,10 +23,10 @@ import java.util.Map;
 
 import org.sonatype.ossindex.service.api.componentreport.ComponentReport;
 import org.sonatype.ossindex.service.api.componentreport.ComponentReportRequest;
-import org.sonatype.ossindex.service.client.internal.OssindexClient;
-import org.sonatype.ossindex.service.client.internal.OssindexClientConfiguration;
-import org.sonatype.ossindex.service.client.internal.transport.Marshaller;
-import org.sonatype.ossindex.service.client.internal.transport.Transport;
+import org.sonatype.ossindex.service.client.OssindexClient;
+import org.sonatype.ossindex.service.client.OssindexClientConfiguration;
+import org.sonatype.ossindex.service.client.transport.Marshaller;
+import org.sonatype.ossindex.service.client.transport.Transport;
 
 import org.sonatype.goodies.packageurl.PackageUrl;
 
