@@ -74,16 +74,28 @@ public class Version
     return properties;
   }
 
+  private String property(final String name) {
+    String value = properties().getProperty(name);
+    if (value == null || value.contains("${")) {
+      return UNKNOWN;
+    }
+    return value;
+  }
+
   public String getVersion() {
-    return properties().getProperty("version", UNKNOWN);
+    return property("version");
   }
 
   public String getTimestamp() {
-    return properties().getProperty("timestamp", UNKNOWN);
+    return property("timestamp");
+  }
+
+  public String getTag() {
+    return property("tag");
   }
 
   @Override
   public String toString() {
-    return String.format("%s (%s)", getVersion(), getTimestamp());
+    return String.format("%s (%s; %s)", getVersion(), getTimestamp(), getTag());
   }
 }
