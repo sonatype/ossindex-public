@@ -28,7 +28,6 @@ import com.google.gson.JsonParseException;
 import com.google.gson.JsonPrimitive;
 import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
-import org.joda.time.Instant;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
@@ -45,7 +44,7 @@ public class GsonMarshaller
   public GsonMarshaller() {
     gson = new GsonBuilder()
         .registerTypeAdapter(PackageUrl.class, new PackageUrlAdapter())
-        .registerTypeAdapter(Instant.class, new InstantAdapter())
+        // .registerTypeAdapter(Instant.class, new InstantAdapter())
         .create();
   }
 
@@ -88,24 +87,22 @@ public class GsonMarshaller
     }
   }
 
-  // TODO: this is presently ancillary as no time fields are exposed, but here for future reference
-
-  /**
-   * Joda-time {@link Instant} adapter.
-   */
-  private static class InstantAdapter
-      implements JsonDeserializer<Instant>, JsonSerializer<Instant>
-  {
-    @Override
-    public Instant deserialize(final JsonElement element, final Type type, final JsonDeserializationContext context)
-        throws JsonParseException
-    {
-      return new Instant(element.getAsLong());
-    }
-
-    @Override
-    public JsonElement serialize(final Instant value, final Type type, final JsonSerializationContext context) {
-      return new JsonPrimitive(value.getMillis());
-    }
-  }
+  ///**
+  // * Joda-time {@link Instant} adapter.
+  // */
+  //private static class InstantAdapter
+  //    implements JsonDeserializer<Instant>, JsonSerializer<Instant>
+  //{
+  //  @Override
+  //  public Instant deserialize(final JsonElement element, final Type type, final JsonDeserializationContext context)
+  //      throws JsonParseException
+  //  {
+  //    return new Instant(element.getAsLong());
+  //  }
+  //
+  //  @Override
+  //  public JsonElement serialize(final Instant value, final Type type, final JsonSerializationContext context) {
+  //    return new JsonPrimitive(value.getMillis());
+  //  }
+  //}
 }
