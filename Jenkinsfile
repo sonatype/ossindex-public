@@ -6,6 +6,14 @@ String mavenRepo = '.repo'
 String mavenOptions = '-V -B -e'
 
 pipeline {
+  options {
+    buildDiscarder(
+        logRotator(numToKeepStr: '100', daysToKeepStr: '14',  artifactNumToKeepStr: '20', artifactDaysToKeepStr: '10')
+    )
+    disableConcurrentBuilds()
+    timestamps()
+  }
+
   agent {
     label 'ubuntu-zion'
   }
@@ -22,7 +30,9 @@ pipeline {
   stages {
     stage('Build') {
       steps {
-        withMaven(maven: mavenVersion, jdk: jdkVersion, mavenSettingsConfig: mavenSettings, mavenLocalRepo: mavenRepo) {
+        withMaven(maven: mavenVersion, jdk: jdkVersion, mavenSettingsConfig: mavenSettings, mavenLocalRepo: mavenRepo,
+            // disable automatic artifact publisher
+            options: [ artifactsPublisher(disabled: true) ]) {
           sh "mvn $mavenOptions clean install"
         }
       }
@@ -31,7 +41,8 @@ pipeline {
 
   post {
     always {
-      junit '**/target/*-reports/*.xml'
+      // purge workspace after build finishes
+      deleteDir()
     }
   }
 }
