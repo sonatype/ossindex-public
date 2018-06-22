@@ -1,3 +1,3 @@
 # Sonatype OSS Index - Public
 
-Provides api and clients for Sonatype OSS Index.
+Provides api and clients for [Sonatype OSS Index](https://ossindex.sonatype.org/).
