@@ -16,9 +16,11 @@ import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URI;
 
+import org.sonatype.ossindex.service.client.OssindexClientConfiguration;
+
 import com.google.common.base.Charsets;
+import com.google.common.net.HttpHeaders;
 import org.apache.http.HttpEntity;
-import org.apache.http.HttpHeaders;
 import org.apache.http.StatusLine;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
@@ -30,6 +32,7 @@ import org.apache.http.util.EntityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
@@ -44,14 +47,23 @@ public class HttpClientTransport
 
   private final UserAgentSupplier userAgent;
 
+  private OssindexClientConfiguration configuration;
+
   public HttpClientTransport(final UserAgentSupplier userAgent) {
     this.userAgent = checkNotNull(userAgent);
+  }
+
+  @Override
+  public void init(final OssindexClientConfiguration configuration) {
+    this.configuration = checkNotNull(configuration);
   }
 
   @Override
   public String post(final URI url, final String payloadType, final String payload, final String acceptType)
       throws TransportException, IOException
   {
+    checkArgument(configuration != null);
+
     log.debug("POST {}; payload: {} ({}); accept: {}", url, payload, payloadType, acceptType);
 
     try (CloseableHttpClient httpClient = createClient()) {
@@ -93,5 +105,11 @@ public class HttpClientTransport
    */
   protected void customize(final HttpPost request) {
     request.setHeader(HttpHeaders.USER_AGENT, userAgent.get());
+
+    // maybe add authorization headers if configured
+    String authorization = BasicAuthHelper.authorizationHeader(configuration.getAuthConfiguration());
+    if (authorization != null) {
+      request.setHeader(HttpHeaders.AUTHORIZATION, authorization);
+    }
   }
 }

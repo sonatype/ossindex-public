@@ -60,6 +60,12 @@
       <artifactId>jcl-over-slf4j</artifactId>
     </dependency>
 
+    <dependency>
+      <groupId>com.google.code.findbugs</groupId>
+      <artifactId>jsr305</artifactId>
+      <optional>true</optional>
+    </dependency>
+
     <!-- Guava 20.x is the latest which supports Java 1.7 -->
     <dependency>
       <groupId>com.google.guava</groupId>

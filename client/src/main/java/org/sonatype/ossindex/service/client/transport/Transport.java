@@ -15,6 +15,8 @@ package org.sonatype.ossindex.service.client.transport;
 import java.io.IOException;
 import java.net.URI;
 
+import org.sonatype.ossindex.service.client.OssindexClientConfiguration;
+
 /**
  * Transport abstraction.
  *
@@ -22,6 +24,8 @@ import java.net.URI;
  */
 public interface Transport
 {
+  void init(final OssindexClientConfiguration configuration);
+
   /**
    * Perform HTTP POST request.
    */

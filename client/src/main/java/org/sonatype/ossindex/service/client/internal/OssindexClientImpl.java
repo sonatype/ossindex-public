@@ -86,6 +86,11 @@ public class OssindexClientImpl
     checkState(config.getBatchSize() > 0 && config.getBatchSize() <= 1024, "Batch-size out of range");
     batchSize = config.getBatchSize();
     log.debug("Batch size: {}", batchSize);
+
+    // FIXME: could potentially just make this required on the ctor of the transport?
+
+    // inform transport of configuration
+    transport.init(config);
   }
 
   /**

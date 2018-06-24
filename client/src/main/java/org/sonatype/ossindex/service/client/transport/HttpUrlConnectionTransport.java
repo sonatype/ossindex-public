@@ -22,12 +22,15 @@ import java.net.HttpURLConnection;
 import java.net.URI;
 import java.net.URL;
 
+import org.sonatype.ossindex.service.client.OssindexClientConfiguration;
+
 import com.google.common.io.CharStreams;
 import com.google.common.net.HttpHeaders;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import static com.google.common.base.Preconditions.checkNotNull;
+import static com.google.common.base.Preconditions.checkState;
 
 /**
  * {@link HttpURLConnection} transport.
@@ -41,8 +44,15 @@ public class HttpUrlConnectionTransport
 
   private final UserAgentSupplier userAgent;
 
+  private OssindexClientConfiguration configuration;
+
   public HttpUrlConnectionTransport(final UserAgentSupplier userAgent) {
     this.userAgent = checkNotNull(userAgent);
+  }
+
+  @Override
+  public void init(final OssindexClientConfiguration configuration) {
+    this.configuration = checkNotNull(configuration);
   }
 
   @Override
@@ -83,8 +93,17 @@ public class HttpUrlConnectionTransport
    * Return connection for URL; customize as needed.
    */
   protected HttpURLConnection connect(final URL url) throws IOException {
+    checkState(configuration != null);
+
     HttpURLConnection connection = (HttpURLConnection) url.openConnection();
     connection.setRequestProperty(HttpHeaders.USER_AGENT, userAgent.get());
+
+    // maybe add authorization headers if configured
+    String authorization = BasicAuthHelper.authorizationHeader(configuration.getAuthConfiguration());
+    if (authorization != null) {
+      connection.setRequestProperty(HttpHeaders.AUTHORIZATION, authorization);
+    }
+
     return connection;
   }
 }

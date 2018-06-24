@@ -14,6 +14,8 @@ package org.sonatype.ossindex.service.client;
 
 import java.net.URI;
 
+import javax.annotation.Nullable;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.cache.CacheBuilderSpec;
 
@@ -41,6 +43,10 @@ public class OssindexClientConfiguration
   @JsonProperty
   private CacheBuilderSpec reportCache = DEFAULT_CACHE;
 
+  @Nullable
+  @JsonProperty
+  private AuthConfiguration authConfiguration;
+
   public URI getBaseUrl() {
     return baseUrl;
   }
@@ -67,5 +73,14 @@ public class OssindexClientConfiguration
 
   public void setReportCache(CacheBuilderSpec reportCache) {
     this.reportCache = reportCache;
+  }
+
+  @Nullable
+  public AuthConfiguration getAuthConfiguration() {
+    return authConfiguration;
+  }
+
+  public void setAuthConfiguration(@Nullable final AuthConfiguration authConfiguration) {
+    this.authConfiguration = authConfiguration;
   }
 }
