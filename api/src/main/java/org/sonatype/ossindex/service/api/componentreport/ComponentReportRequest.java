@@ -17,7 +17,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
 import org.sonatype.goodies.packageurl.PackageUrl;
+import org.sonatype.goodies.packageurl.jaxb.PackageUrlXmlAdapter;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.base.MoreObjects;
@@ -30,6 +38,8 @@ import io.swagger.annotations.ApiModelProperty;
  * @since ???
  */
 @ApiModel(description = "Component vulnerability report request")
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class ComponentReportRequest
     implements Serializable
 {
@@ -37,6 +47,9 @@ public class ComponentReportRequest
 
   @ApiModelProperty(value = "One or more component coordinates as package-url", required = true)
   @JsonProperty
+  @XmlElementWrapper
+  @XmlElement(name="coordinates")
+  @XmlJavaTypeAdapter(PackageUrlXmlAdapter.class)
   private List<PackageUrl> coordinates;
 
   public ComponentReportRequest(final List<PackageUrl> coordinates) {
