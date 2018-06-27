@@ -1,0 +1,3 @@
+org.sonatype.ossindex.service.client
+org.sonatype.ossindex.service.client.internal
+org.sonatype.ossindex.service.client.transport
