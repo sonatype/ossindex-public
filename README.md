@@ -1,5 +1,7 @@
 # Sonatype OSS Index - Public
 
+![License](https://img.shields.io/github/license/sonatype/ossindex-public.svg?label=License)
+
 Provides api and clients for [Sonatype OSS Index](https://ossindex.sonatype.org/).
 
 ## Building
