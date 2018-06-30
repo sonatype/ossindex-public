@@ -16,16 +16,23 @@ import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URI;
 
+import org.sonatype.ossindex.service.client.AuthConfiguration;
 import org.sonatype.ossindex.service.client.OssindexClientConfiguration;
+import org.sonatype.ossindex.service.client.ProxyConfiguration;
 
 import com.google.common.base.Charsets;
 import com.google.common.net.HttpHeaders;
 import org.apache.http.HttpEntity;
+import org.apache.http.HttpHost;
 import org.apache.http.StatusLine;
+import org.apache.http.auth.AuthScope;
+import org.apache.http.auth.UsernamePasswordCredentials;
+import org.apache.http.client.CredentialsProvider;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.ContentType;
 import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.BasicCredentialsProvider;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.util.EntityUtils;
@@ -57,6 +64,8 @@ public class HttpClientTransport
   public void init(final OssindexClientConfiguration configuration) {
     this.configuration = checkNotNull(configuration);
   }
+
+  // TODO: check if we need to use httpclient.execute(request,context) form?
 
   @Override
   public String post(final URI url, final String payloadType, final String payload, final String acceptType)
@@ -95,9 +104,36 @@ public class HttpClientTransport
    * Create customized client.
    */
   protected CloseableHttpClient createClient() {
-    return HttpClientBuilder.create()
-        .disableCookieManagement()
-        .build();
+    HttpClientBuilder builder = HttpClientBuilder.create();
+
+    // disable support for cookies
+    builder.disableCookieManagement();
+
+    // prepare default credentials provider
+    CredentialsProvider credentialsProvider = new BasicCredentialsProvider();
+    builder.setDefaultCredentialsProvider(credentialsProvider);
+
+    // maybe configure http-proxy support
+    ProxyConfiguration proxyConfiguration = configuration.getProxyConfiguration();
+    if (proxyConfiguration != null) {
+      // TODO: non-proxy-hosts matching?
+
+      HttpHost proxy = new HttpHost(proxyConfiguration.getHost(), proxyConfiguration.getPort(), proxyConfiguration.getProtocol());
+      builder.setProxy(proxy);
+      log.debug("Configured http-proxy: {}", proxy);
+
+      // maybe configure http-proxy authentication
+      AuthConfiguration auth = proxyConfiguration.getAuthConfiguration();
+      if (auth != null) {
+        credentialsProvider.setCredentials(
+            new AuthScope(proxy),
+            new UsernamePasswordCredentials(auth.getUsername(), auth.getPassword())
+        );
+        log.debug("Configured http-proxy authentication");
+      }
+    }
+
+    return builder.build();
   }
 
   /**

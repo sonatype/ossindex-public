@@ -16,6 +16,8 @@ import javax.annotation.Nonnull;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 /**
  * Authentication configuration.
  *
@@ -30,6 +32,15 @@ public class AuthConfiguration
   @Nonnull
   @JsonProperty
   private String password;
+
+  public AuthConfiguration(@Nonnull final String username, @Nonnull final String password) {
+    this.username = checkNotNull(username);
+    this.password = checkNotNull(password);
+  }
+
+  public AuthConfiguration() {
+    // empty
+  }
 
   public String getUsername() {
     return username;

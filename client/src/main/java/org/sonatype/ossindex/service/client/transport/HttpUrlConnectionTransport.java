@@ -18,11 +18,21 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.Reader;
 import java.io.StringWriter;
+import java.net.Authenticator;
 import java.net.HttpURLConnection;
+import java.net.InetSocketAddress;
+import java.net.PasswordAuthentication;
+import java.net.Proxy;
+import java.net.Proxy.Type;
+import java.net.SocketAddress;
 import java.net.URI;
 import java.net.URL;
 
+import javax.annotation.Nullable;
+
+import org.sonatype.ossindex.service.client.AuthConfiguration;
 import org.sonatype.ossindex.service.client.OssindexClientConfiguration;
+import org.sonatype.ossindex.service.client.ProxyConfiguration;
 
 import com.google.common.io.CharStreams;
 import com.google.common.net.HttpHeaders;
@@ -93,17 +103,79 @@ public class HttpUrlConnectionTransport
    * Return connection for URL; customize as needed.
    */
   protected HttpURLConnection connect(final URL url) throws IOException {
+    checkNotNull(url);
     checkState(configuration != null);
 
-    HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-    connection.setRequestProperty(HttpHeaders.USER_AGENT, userAgent.get());
+    HttpURLConnection connection = null;
+    try {
+      Proxy proxy = maybeCreateProxy(configuration);
+      if (proxy != null) {
+        connection = (HttpURLConnection) url.openConnection(proxy);
+      }
+      else {
+        connection = (HttpURLConnection) url.openConnection();
+      }
 
-    // maybe add authorization headers if configured
-    String authorization = BasicAuthHelper.authorizationHeader(configuration.getAuthConfiguration());
-    if (authorization != null) {
-      connection.setRequestProperty(HttpHeaders.AUTHORIZATION, authorization);
+      connection.setRequestProperty(HttpHeaders.USER_AGENT, userAgent.get());
+
+      // maybe add authorization headers if configured
+      String authorization = BasicAuthHelper.authorizationHeader(configuration.getAuthConfiguration());
+      if (authorization != null) {
+        connection.setRequestProperty(HttpHeaders.AUTHORIZATION, authorization);
+      }
+    }
+    catch (IOException e) {
+      if (connection != null) {
+        connection.disconnect();
+      }
+      throw new IOException("Failed to create connection", e);
     }
 
     return connection;
+  }
+
+  /**
+   * Maybe create a proxy if configured.
+   */
+  @Nullable
+  protected Proxy maybeCreateProxy(final OssindexClientConfiguration configuration) {
+    checkNotNull(configuration);
+
+    ProxyConfiguration proxyConfiguration = configuration.getProxyConfiguration();
+    if (proxyConfiguration == null) {
+      return null;
+    }
+
+    // TODO: non-proxy-hosts matching?
+
+    final String proxyHost = proxyConfiguration.getHost();
+    final SocketAddress address = new InetSocketAddress(proxyHost, proxyConfiguration.getPort());
+
+    AuthConfiguration auth = proxyConfiguration.getAuthConfiguration();
+    if (auth != null) {
+      final PasswordAuthentication credentials =
+          new PasswordAuthentication(auth.getUsername(), auth.getPassword().toCharArray());
+
+      Authenticator authenticator = new Authenticator()
+      {
+        @Override
+        protected PasswordAuthentication getPasswordAuthentication() {
+          if (proxyHost.equals(getRequestingHost()) || getRequestorType().equals(RequestorType.PROXY)) {
+            return credentials;
+          }
+          else {
+            return super.getPasswordAuthentication();
+          }
+        }
+      };
+
+      Authenticator.setDefault(authenticator);
+      log.debug("Configured http-proxy authentication");
+    }
+
+    Proxy proxy = new Proxy(Type.HTTP, address);
+    log.debug("Configured http-proxy: {}", proxy);
+
+    return proxy;
   }
 }

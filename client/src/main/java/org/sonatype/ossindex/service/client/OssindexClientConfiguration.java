@@ -44,8 +44,12 @@ public class OssindexClientConfiguration
   private CacheBuilderSpec reportCache = DEFAULT_CACHE;
 
   @Nullable
-  @JsonProperty
+  @JsonProperty("auth")
   private AuthConfiguration authConfiguration;
+
+  @Nullable
+  @JsonProperty("proxy")
+  private ProxyConfiguration proxyConfiguration;
 
   public URI getBaseUrl() {
     return baseUrl;
@@ -82,5 +86,14 @@ public class OssindexClientConfiguration
 
   public void setAuthConfiguration(@Nullable final AuthConfiguration authConfiguration) {
     this.authConfiguration = authConfiguration;
+  }
+
+  @Nullable
+  public ProxyConfiguration getProxyConfiguration() {
+    return proxyConfiguration;
+  }
+
+  public void setProxyConfiguration(@Nullable final ProxyConfiguration proxyConfiguration) {
+    this.proxyConfiguration = proxyConfiguration;
   }
 }
