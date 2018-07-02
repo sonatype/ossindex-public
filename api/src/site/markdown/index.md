@@ -12,6 +12,6 @@
     See the Apache License Version 2.0 for the specific language governing permissions and limitations there under.
 
 -->
-# Sonatype OSS Index - API
+# About
 
-TODO
+Defines API *endpoint* and *models* for communicating with [Sonatype OSS Index](https://ossindex.sonatype.org/).

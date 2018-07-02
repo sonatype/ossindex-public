@@ -12,6 +12,24 @@
     See the Apache License Version 2.0 for the specific language governing permissions and limitations there under.
 
 -->
-# Sonatype OSS Index - Client
+# About
 
-TODO
+Provides a simple Java *client* to communicate with [Sonatype OSS Index](https://ossindex.sonatype.org/).
+
+## Transports
+
+A few options for different *transports* are provided.
+
+### HttpUrlConnectionTransport
+
+The [HttpUrlConnectionTransport](apidocs/org/sonatype/ossindex/service/client/transport/HttpUrlConnectionTransport.html)
+makes use of standard JRE `HttpUrlConnection`.
+
+### HttpClientTransport
+
+The [HttpClientTransport](apidocs/org/sonatype/ossindex/service/client/transport/HttpClientTransport.html) makes use
+of [Apache HttpClient](https://hc.apache.org/httpcomponents-client-ga/).
+
+## Marshalling
+
+The default marshalling library used is [Google Gson](https://github.com/google/gson).
