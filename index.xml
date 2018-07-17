@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Welcome on Sonatype OSS Index: Public</title>
+    <link>https://sonatype.github.io/ossindex-public/</link>
+    <description>Recent content in Welcome on Sonatype OSS Index: Public</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    
+	<atom:link href="https://sonatype.github.io/ossindex-public/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>About</title>
+      <link>https://sonatype.github.io/ossindex-public/about/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://sonatype.github.io/ossindex-public/about/</guid>
+      <description> TODO
+ </description>
+    </item>
+    
+    <item>
+      <title>Client</title>
+      <link>https://sonatype.github.io/ossindex-public/client/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://sonatype.github.io/ossindex-public/client/</guid>
+      <description>Provides a simple Java client to communicate with Sonatype OSS Index.
+Transports A few options for different transports are provided.
+HttpUrlConnectionTransport The HttpUrlConnectionTransport makes use of standard JRE HttpUrlConnection.
+HttpClientTransport The HttpClientTransport makes use of Apache HttpClient.
+Marshalling The default marshalling library used is Google Gson.</description>
+    </item>
+    
+    <item>
+      <title>Development</title>
+      <link>https://sonatype.github.io/ossindex-public/development/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://sonatype.github.io/ossindex-public/development/</guid>
+      <description> Open Source on  Github.
+ Source Code  Repository  References  Issue Tracker  </description>
+    </item>
+    
+    <item>
+      <title>License</title>
+      <link>https://sonatype.github.io/ossindex-public/license/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://sonatype.github.io/ossindex-public/license/</guid>
+      <description>1 licenses   Name URL     ASL2 http://www.apache.org/licenses/LICENSE-2.0.txt    ASL2  Apache License Version 2.0, January 2004 http://www.apache.org/licenses/ TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION 1. Definitions. &amp;#34;License&amp;#34; shall mean the terms and conditions for use, reproduction, and distribution as defined by Sections 1 through 9 of this document. &amp;#34;Licensor&amp;#34; shall mean the copyright owner or entity authorized by the copyright owner that is granting the License.</description>
+    </item>
+    
+    <item>
+      <title>Search</title>
+      <link>https://sonatype.github.io/ossindex-public/search/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://sonatype.github.io/ossindex-public/search/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>
