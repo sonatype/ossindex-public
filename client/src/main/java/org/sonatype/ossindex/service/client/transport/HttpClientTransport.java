@@ -45,7 +45,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 /**
  * Apache {@link org.apache.http.client.HttpClient} transport.
  *
- * @since ???
+ * @since 1.0.0
  */
 public class HttpClientTransport
     implements Transport

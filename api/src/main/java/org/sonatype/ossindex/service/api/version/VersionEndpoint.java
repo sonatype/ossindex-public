@@ -22,7 +22,7 @@ import static org.sonatype.ossindex.service.api.version.VersionMediaTypes.VERSIO
 /**
  * {@link Version} endpoint.
  *
- * @since ???
+ * @since 1.0.0
  */
 @Path("/api/v3/version")
 public interface VersionEndpoint

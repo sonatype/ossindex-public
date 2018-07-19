@@ -24,7 +24,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 /**
  * Supplies {@code User-Agent} header value.
  *
- * @since ???
+ * @since 1.0.0
  */
 public class UserAgentSupplier
     implements Supplier<String>

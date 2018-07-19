@@ -17,7 +17,7 @@ import javax.ws.rs.core.MediaType;
 /**
  * {@link ComponentReport} media-types.
  *
- * @since ???
+ * @since 1.0.0
  */
 public final class ComponentReportMediaTypes
 {

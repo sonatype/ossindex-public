@@ -35,7 +35,7 @@ import io.swagger.annotations.ApiModelProperty;
 /**
  * {@link ComponentReport} request.
  *
- * @since ???
+ * @since 1.0.0
  */
 @ApiModel(description = "Component vulnerability report request")
 @XmlRootElement

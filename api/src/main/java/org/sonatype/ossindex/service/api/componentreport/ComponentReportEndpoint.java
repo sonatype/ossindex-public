@@ -32,7 +32,7 @@ import static org.sonatype.ossindex.service.api.componentreport.ComponentReportM
 /**
  * {@link ComponentReport} endpoint.
  *
- * @since ???
+ * @since 1.0.0
  */
 @Path("/api/v3/component-report")
 public interface ComponentReportEndpoint

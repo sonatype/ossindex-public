@@ -21,7 +21,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 /**
  * Authentication configuration.
  *
- * @since ???
+ * @since 1.0.0
  */
 public class AuthConfiguration
 {

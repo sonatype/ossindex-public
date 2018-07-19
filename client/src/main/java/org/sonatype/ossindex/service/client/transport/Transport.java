@@ -20,7 +20,7 @@ import org.sonatype.ossindex.service.client.OssindexClientConfiguration;
 /**
  * Transport abstraction.
  *
- * @since ???
+ * @since 1.0.0
  */
 public interface Transport
 {

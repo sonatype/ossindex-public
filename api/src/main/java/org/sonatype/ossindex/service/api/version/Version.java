@@ -23,7 +23,7 @@ import io.swagger.annotations.ApiModelProperty;
 /**
  * Version.
  *
- * @since ???
+ * @since 1.0.0
  */
 @ApiModel(description = "Version")
 public class Version

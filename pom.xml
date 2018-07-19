@@ -28,7 +28,7 @@
   <name>${project.groupId}:${project.artifactId}</name>
   <packaging>pom</packaging>
 
-  <version>1-SNAPSHOT</version>
+  <version>1.0.0-SNAPSHOT</version>
 
   <url>https://sonatype.github.io/ossindex-public/</url>
 
@@ -67,8 +67,6 @@
   <properties>
     <maven.compiler.source>1.7</maven.compiler.source>
     <maven.compiler.target>1.7</maven.compiler.target>
-
-    <apache-maven-javadoc-plugin.version>3.0.1</apache-maven-javadoc-plugin.version>
   </properties>
 
   <modules>
@@ -78,8 +76,6 @@
   </modules>
 
   <build>
-    <defaultGoal>install</defaultGoal>
-
     <pluginManagement>
       <plugins>
         <plugin>
@@ -96,23 +92,8 @@
 
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-site-plugin</artifactId>
-          <version>3.7.1</version>
-        </plugin>
-
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-scm-publish-plugin</artifactId>
-          <version>3.0.0</version>
-          <configuration>
-            <scmBranch>gh-pages</scmBranch>
-          </configuration>
-        </plugin>
-
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-javadoc-plugin</artifactId>
-          <version>${apache-maven-javadoc-plugin.version}</version>
+          <version>3.0.1</version>
           <configuration>
             <source>${maven.compiler.source}</source>
             <additionalOptions>
@@ -120,6 +101,12 @@
               <option>-Xdoclint:none</option>
             </additionalOptions>
           </configuration>
+        </plugin>
+
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-invoker-plugin</artifactId>
+          <version>3.1.0</version>
         </plugin>
 
         <!--
@@ -133,11 +120,38 @@
               <include>**/*.ftl</include>
             </includes>
             <excludes combine.children="append">
+              <exclude>src/site/hugo/**</exclude>
               <exclude>*.sh</exclude>
               <exclude>*.cmd</exclude>
               <exclude>private/**</exclude>
               <exclude>references/**</exclude>
             </excludes>
+          </configuration>
+        </plugin>
+
+        <plugin>
+          <groupId>org.sonatype.goodies.dionysus</groupId>
+          <artifactId>dionysus-maven-plugin</artifactId>
+          <version>1-SNAPSHOT</version>
+          <configuration>
+            <theme>
+              <groupId>org.sonatype.goodies.dionysus</groupId>
+              <artifactId>dionysus-hugo-theme</artifactId>
+              <version>1-SNAPSHOT</version>
+            </theme>
+            <mavenOptions>
+              <option>-P!include-private</option>
+            </mavenOptions>
+            <mavenGoals>
+              <goal>javadoc:aggregate</goal>
+              <goal>jxr:aggregate</goal>
+            </mavenGoals>
+            <generators>
+              <mavenLicenses/>
+              <mavenModules/>
+              <mavenPom/>
+              <mavenPlugin/>
+            </generators>
           </configuration>
         </plugin>
       </plugins>
@@ -264,68 +278,8 @@
           </execution>
         </executions>
       </plugin>
-
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-site-plugin</artifactId>
-        <executions>
-          <execution>
-            <id>attach-descriptor</id>
-            <goals>
-              <goal>attach-descriptor</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
     </plugins>
   </build>
-
-  <reporting>
-    <plugins>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-project-info-reports-plugin</artifactId>
-        <version>2.9</version>
-      </plugin>
-
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-jxr-plugin</artifactId>
-        <version>2.5</version>
-      </plugin>
-
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-javadoc-plugin</artifactId>
-        <version>${apache-maven-javadoc-plugin.version}</version>
-        <configuration>
-          <source>${maven.compiler.source}</source>
-          <additionalOptions>
-            <!-- Turn off strict javadoc checks in Java-8 -->
-            <option>-Xdoclint:none</option>
-          </additionalOptions>
-        </configuration>
-      </plugin>
-
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-pmd-plugin</artifactId>
-        <version>3.10.0</version>
-      </plugin>
-
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-surefire-report-plugin</artifactId>
-        <version>2.22.0</version>
-      </plugin>
-
-      <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>findbugs-maven-plugin</artifactId>
-        <version>3.0.5</version>
-      </plugin>
-    </plugins>
-  </reporting>
 
   <profiles>
     <profile>
@@ -368,11 +322,8 @@
     </profile>
 
     <profile>
-      <id>site-stage</id>
-
+      <id>dionysus</id>
       <build>
-        <defaultGoal>clean install site:site site:stage</defaultGoal>
-
         <pluginManagement>
           <plugins>
             <plugin>

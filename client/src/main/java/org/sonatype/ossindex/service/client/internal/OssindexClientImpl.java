@@ -46,7 +46,7 @@ import static org.sonatype.ossindex.service.api.componentreport.ComponentReportM
 /**
  * Default {@link OssindexClient}.
  *
- * @since ???
+ * @since 1.0.0
  */
 public class OssindexClientImpl
     implements OssindexClient

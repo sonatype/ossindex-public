@@ -25,7 +25,7 @@ import static com.google.common.base.Preconditions.checkState;
 /**
  * Basic authentication helper.
  *
- * @since ???
+ * @since 1.0.0
  */
 public class BasicAuthHelper
 {

@@ -17,7 +17,7 @@ import com.google.common.reflect.TypeToken;
 /**
  * Object marshaller.
  *
- * @since ???
+ * @since 1.0.0
  */
 public interface Marshaller
 {

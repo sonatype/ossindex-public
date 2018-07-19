@@ -22,7 +22,7 @@ import com.google.common.cache.CacheBuilderSpec;
 /**
  * {@link OssindexClient} configuration.
  *
- * @since ???
+ * @since 1.0.0
  */
 public class OssindexClientConfiguration
 {

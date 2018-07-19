@@ -17,7 +17,7 @@ import com.google.common.base.Supplier;
 /**
  * {@link Version} supplier.
  *
- * @since ???
+ * @since 1.0.0
  */
 public class VersionSupplier
     implements Supplier<Version>

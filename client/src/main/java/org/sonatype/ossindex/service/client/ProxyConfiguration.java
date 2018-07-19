@@ -20,7 +20,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * Proxy configuration.
  *
- * @since ???
+ * @since 1.0.0
  */
 public class ProxyConfiguration
 {

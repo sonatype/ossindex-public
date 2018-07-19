@@ -22,7 +22,7 @@ import org.sonatype.goodies.packageurl.PackageUrl;
 /**
  * Sonatype OSS Index client.
  *
- * @since ???
+ * @since 1.0.0
  */
 public interface OssindexClient
 {

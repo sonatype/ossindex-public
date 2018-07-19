@@ -34,7 +34,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 /**
  * Gson {@link Marshaller}.
  *
- * @since ???
+ * @since 1.0.0
  */
 public class GsonMarshaller
     implements Marshaller

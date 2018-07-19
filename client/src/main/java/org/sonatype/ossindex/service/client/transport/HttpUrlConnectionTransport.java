@@ -45,7 +45,7 @@ import static com.google.common.base.Preconditions.checkState;
 /**
  * {@link HttpURLConnection} transport.
  *
- * @since ???
+ * @since 1.0.0
  */
 public class HttpUrlConnectionTransport
     implements Transport
