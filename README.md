@@ -1,6 +1,8 @@
 # Sonatype OSS Index - Public
 
-![License](https://img.shields.io/github/license/sonatype/ossindex-public.svg?label=License)
+![license](https://img.shields.io/github/license/sonatype/ossindex-public.svg)
+
+![maven-central](https://img.shields.io/maven-central/v/org.sonatype.ossindex/ossindex-service.svg)
 
 Provides api and clients for [Sonatype OSS Index](https://ossindex.sonatype.org/).
 
