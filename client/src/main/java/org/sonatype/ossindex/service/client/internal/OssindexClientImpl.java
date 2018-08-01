@@ -13,10 +13,10 @@
 package org.sonatype.ossindex.service.client.internal;
 
 import java.net.URI;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -33,6 +33,7 @@ import org.sonatype.goodies.packageurl.PackageUrl;
 import com.google.common.base.Stopwatch;
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
+import com.google.common.collect.ImmutableList;
 import com.google.common.reflect.TypeToken;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -87,8 +88,6 @@ public class OssindexClientImpl
     batchSize = config.getBatchSize();
     log.debug("Batch size: {}", batchSize);
 
-    // FIXME: could potentially just make this required on the ctor of the transport?
-
     // inform transport of configuration
     transport.init(config);
   }
@@ -128,7 +127,7 @@ public class OssindexClientImpl
 
     // request any un-cached reports in batches and append to cache
     if (!uncached.isEmpty()) {
-      List<PackageUrl> batch = new ArrayList<>(batchSize);
+      LinkedHashSet<PackageUrl> batch = new LinkedHashSet<>(batchSize);
 
       Iterator<PackageUrl> iter = uncached.iterator();
       while (iter.hasNext()) {
@@ -151,26 +150,35 @@ public class OssindexClientImpl
 
   private static final TypeToken<List<ComponentReport>> LIST_COMPONENT_REPORT = new TypeToken<List<ComponentReport>>() { };
 
-  private Map<PackageUrl, ComponentReport> doRequestComponentReports(final List<PackageUrl> coordinates)
+  /**
+   * Fetch component reports.
+   *
+   * Input order is important, so we must have a ordered unique-set of coordinates so we can correlate.
+   */
+  private Map<PackageUrl, ComponentReport> doRequestComponentReports(final LinkedHashSet<PackageUrl> coordinates)
       throws Exception
   {
     log.debug("Requesting {} un-cached component-reports", coordinates.size());
 
     ComponentReportRequest request = new ComponentReportRequest();
-    request.setCoordinates(coordinates);
+    request.setCoordinates(ImmutableList.copyOf(coordinates));
 
     URI url = baseUrl.resolve("api/v3/component-report");
     String response = transport.post(url, REQUEST_V1_JSON, marshaller.marshal(request), REPORT_V1_JSON);
     List<ComponentReport> reports = marshaller.unmarshal(response, LIST_COMPONENT_REPORT);
 
     // puke if the response does not contain the same number of entries as input request
-    checkState(reports.size() == coordinates.size(), "Result size mismatch; expected: %s, have: %s", coordinates.size(),
-        reports.size());
+    checkState(reports.size() == coordinates.size(),
+        "Result size mismatch; expected: %s, have: %s", coordinates.size(), reports.size());
 
+    // correlate input coordinates to report, as report could have a different form of the coordinates?
+    log.debug("Correlating {} coordinates to {} reports", coordinates.size(), reports.size());
     Map<PackageUrl, ComponentReport> results = new LinkedHashMap<>();
     int i = 0;
     for (PackageUrl purl : coordinates) {
-      results.put(purl, reports.get(i++));
+      ComponentReport report = reports.get(i++);
+      log.debug("  {} -> {}", purl, report.getCoordinates());
+      results.put(purl, report);
     }
     return results;
   }
