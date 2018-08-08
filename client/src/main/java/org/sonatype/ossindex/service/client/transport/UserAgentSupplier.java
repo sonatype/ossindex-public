@@ -13,6 +13,7 @@
 package org.sonatype.ossindex.service.client.transport;
 
 import org.sonatype.ossindex.service.client.internal.Version;
+import org.sonatype.ossindex.service.client.transport.UserAgentBuilder.Product;
 
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.Supplier;
@@ -31,10 +32,15 @@ public class UserAgentSupplier
 {
   private static final Logger log = LoggerFactory.getLogger(UserAgentSupplier.class);
 
-  private String value;
+  /**
+   * @since ???
+   */
+  public static final String PRODUCT = "ossindex-client";
+
+  private final String value;
 
   public UserAgentSupplier(final Version version) {
-    this("ossindex-client", version.getVersion());
+    this(PRODUCT, version.getVersion());
   }
 
   @VisibleForTesting
@@ -42,15 +48,26 @@ public class UserAgentSupplier
     checkNotNull(product);
     checkNotNull(version);
 
-    value = String.format("%s/%s (%s; %s; %s; %s)",
-        product,
-        version,
-        System.getProperty("os.name"),
-        System.getProperty("os.version"),
-        System.getProperty("os.arch"),
-        System.getProperty("java.version")
+    UserAgentBuilder builder = new UserAgentBuilder().product(
+        new Product(product, version).comment(
+            System.getProperty("os.name"),
+            System.getProperty("os.version"),
+            System.getProperty("os.arch"),
+            System.getProperty("java.version"))
     );
+
+    customize(builder);
+
+    value = builder.build();
+
     log.debug("User-agent: {}", value);
+  }
+
+  /**
+   * @since ???
+   */
+  protected void customize(final UserAgentBuilder builder) {
+    // empty
   }
 
   @Override
