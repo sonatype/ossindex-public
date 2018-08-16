@@ -28,7 +28,7 @@ public class OssindexClientConfiguration
 {
   public static final URI DEFAULT_BASE_URL = URI.create("https://ossindex.sonatype.org/");
 
-  public static final int DEFAULT_BATCH_SIZE = 64;
+  public static final int DEFAULT_BATCH_SIZE = 128;
 
   public static final CacheBuilderSpec DEFAULT_CACHE = CacheBuilderSpec.parse(
       "maximumSize=256,expireAfterAccess=2m,softValues"
