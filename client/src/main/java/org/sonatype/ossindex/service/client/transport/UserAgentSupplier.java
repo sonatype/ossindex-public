@@ -33,7 +33,7 @@ public class UserAgentSupplier
   private static final Logger log = LoggerFactory.getLogger(UserAgentSupplier.class);
 
   /**
-   * @since ???
+   * @since 1.0.2
    */
   public static final String PRODUCT = "ossindex-client";
 
@@ -64,7 +64,7 @@ public class UserAgentSupplier
   }
 
   /**
-   * @since ???
+   * @since 1.0.2
    */
   protected void customize(final UserAgentBuilder builder) {
     // empty

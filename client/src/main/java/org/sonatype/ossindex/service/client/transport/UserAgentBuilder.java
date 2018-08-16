@@ -27,7 +27,7 @@ import static com.google.common.base.Preconditions.checkState;
 /**
  * {@code User-Agent} builder.
  *
- * @since ???
+ * @since 1.0.2
  */
 public class UserAgentBuilder
 {
