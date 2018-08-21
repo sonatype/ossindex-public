@@ -29,6 +29,10 @@ import static com.google.common.base.Preconditions.checkState;
  */
 public class BasicAuthHelper
 {
+  private BasicAuthHelper() {
+    // empty
+  }
+
   @Nullable
   public static String authorizationHeader(@Nullable final AuthConfiguration configuration) {
     if (configuration == null) {
@@ -45,6 +49,7 @@ public class BasicAuthHelper
     return "Basic " + encoded;
   }
 
+  @SuppressWarnings("CharsetObjectCanBeUsed")
   private static byte[] bytesOf(final String value) {
     try {
       return value.getBytes("ISO-8859-1");
