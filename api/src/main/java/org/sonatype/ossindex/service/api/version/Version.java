@@ -29,7 +29,7 @@ import io.swagger.annotations.ApiModelProperty;
 public class Version
     implements Serializable
 {
-  private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = 2L;
 
   @ApiModelProperty("Version")
   @JsonProperty
@@ -45,10 +45,21 @@ public class Version
   @JsonProperty
   private String buildTag;
 
-  public Version(final String version, final String buildTimestamp, final String buildTag) {
+  /**
+   * @since ???
+   */
+  @ApiModelProperty("Build notes")
+  @JsonProperty
+  private String buildNotes;
+
+  /**
+   * @since ???
+   */
+  public Version(final String version, final String buildTimestamp, final String buildTag, final String buildNotes) {
     this.version = version;
     this.buildTimestamp = buildTimestamp;
     this.buildTag = buildTag;
+    this.buildNotes = buildNotes;
   }
 
   public Version() {
@@ -79,6 +90,20 @@ public class Version
     this.buildTag = buildTag;
   }
 
+  /**
+   * @since ???
+   */
+  public String getBuildNotes() {
+    return buildNotes;
+  }
+
+  /**
+   * @since ???
+   */
+  public void setBuildNotes(final String buildNotes) {
+    this.buildNotes = buildNotes;
+  }
+
   @Override
   public boolean equals(final Object o) {
     if (this == o) {
@@ -90,12 +115,13 @@ public class Version
     Version version1 = (Version) o;
     return Objects.equals(version, version1.version) &&
         Objects.equals(buildTimestamp, version1.buildTimestamp) &&
-        Objects.equals(buildTag, version1.buildTag);
+        Objects.equals(buildTag, version1.buildTag) &&
+        Objects.equals(buildNotes, version1.buildNotes);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(version, buildTimestamp, buildTag);
+    return Objects.hash(version, buildTimestamp, buildTag, buildNotes);
   }
 
   @Override
@@ -104,6 +130,7 @@ public class Version
         .add("version", version)
         .add("buildTimestamp", buildTimestamp)
         .add("buildTag", buildTag)
+        .add("buildNotes", buildNotes)
         .toString();
   }
 }
