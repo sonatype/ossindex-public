@@ -47,7 +47,7 @@ public class AuthConfiguration
   }
 
   public void setUsername(final String username) {
-    this.username = username;
+    this.username = checkNotNull(username);
   }
 
   public String getPassword() {
@@ -55,6 +55,6 @@ public class AuthConfiguration
   }
 
   public void setPassword(final String password) {
-    this.password = password;
+    this.password = checkNotNull(password);
   }
 }

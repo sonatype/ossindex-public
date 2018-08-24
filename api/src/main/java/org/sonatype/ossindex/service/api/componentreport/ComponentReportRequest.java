@@ -45,6 +45,8 @@ public class ComponentReportRequest
 {
   private static final long serialVersionUID = 1L;
 
+  // FIXME: this should really be declared as a Set
+
   @ApiModelProperty(value = "One or more component coordinates as package-url", required = true)
   @JsonProperty
   @XmlElementWrapper

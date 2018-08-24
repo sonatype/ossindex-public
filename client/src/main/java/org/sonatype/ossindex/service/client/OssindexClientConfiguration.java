@@ -19,6 +19,8 @@ import javax.annotation.Nullable;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.cache.CacheBuilderSpec;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 /**
  * {@link OssindexClient} configuration.
  *
@@ -26,10 +28,19 @@ import com.google.common.cache.CacheBuilderSpec;
  */
 public class OssindexClientConfiguration
 {
+  /**
+   * Default base URL for OSS Index service.
+   */
   public static final URI DEFAULT_BASE_URL = URI.create("https://ossindex.sonatype.org/");
 
+  /**
+   * Default batch-size.
+   */
   public static final int DEFAULT_BATCH_SIZE = 128;
 
+  /**
+   * Default cache configuration.
+   */
   public static final CacheBuilderSpec DEFAULT_CACHE = CacheBuilderSpec.parse(
       "maximumSize=256,expireAfterAccess=2m,softValues"
   );
@@ -51,48 +62,82 @@ public class OssindexClientConfiguration
   @JsonProperty("proxy")
   private ProxyConfiguration proxyConfiguration;
 
+  /**
+   * Returns the base URL for the OSS Index service.
+   */
   public URI getBaseUrl() {
     return baseUrl;
   }
 
-  public void setBaseUrl(URI baseUrl) {
-    this.baseUrl = baseUrl;
+  /**
+   * Set the base URL for the OSS Index service.
+   */
+  public void setBaseUrl(final URI baseUrl) {
+    this.baseUrl = checkNotNull(baseUrl);
   }
 
+  /**
+   * @see #setBaseUrl(URI)
+   */
   public void setBaseUrl(final String baseUrl) {
+    checkNotNull(baseUrl);
     setBaseUrl(URI.create(baseUrl));
   }
 
+  /**
+   * Returns the batch-size.
+   */
   public int getBatchSize() {
     return batchSize;
   }
 
-  public void setBatchSize(int batchSize) {
+  /**
+   * Set the batch-size.
+   */
+  public void setBatchSize(final int batchSize) {
     this.batchSize = batchSize;
   }
 
+  /**
+   * Returns the cache configuration.
+   */
   public CacheBuilderSpec getReportCache() {
     return reportCache;
   }
 
-  public void setReportCache(CacheBuilderSpec reportCache) {
-    this.reportCache = reportCache;
+  /**
+   * Set the cache configuration.
+   */
+  public void setReportCache(final CacheBuilderSpec reportCache) {
+    this.reportCache = checkNotNull(reportCache);
   }
 
+  /**
+   * Returns the authentication configuration; or {@code null} if not configured.
+   */
   @Nullable
   public AuthConfiguration getAuthConfiguration() {
     return authConfiguration;
   }
 
+  /**
+   * Set the authentication configuration; or {@code null} to disable.
+   */
   public void setAuthConfiguration(@Nullable final AuthConfiguration authConfiguration) {
     this.authConfiguration = authConfiguration;
   }
 
+  /**
+   * Returns the proxy configuration; or {@code null} if not configured.
+   */
   @Nullable
   public ProxyConfiguration getProxyConfiguration() {
     return proxyConfiguration;
   }
 
+  /**
+   * Set the proxy configuration; or {@code null} to disable.
+   */
   public void setProxyConfiguration(@Nullable final ProxyConfiguration proxyConfiguration) {
     this.proxyConfiguration = proxyConfiguration;
   }

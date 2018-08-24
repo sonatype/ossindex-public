@@ -17,6 +17,8 @@ import javax.annotation.Nullable;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 /**
  * Proxy configuration.
  *
@@ -54,7 +56,7 @@ public class ProxyConfiguration
   }
 
   public void setProtocol(@Nonnull final String protocol) {
-    this.protocol = protocol;
+    this.protocol = checkNotNull(protocol);
   }
 
   @Nonnull
@@ -63,7 +65,7 @@ public class ProxyConfiguration
   }
 
   public void setHost(@Nonnull final String host) {
-    this.host = host;
+    this.host = checkNotNull(host);
   }
 
   @Nonnull

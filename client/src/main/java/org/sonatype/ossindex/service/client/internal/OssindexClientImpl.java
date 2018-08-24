@@ -14,12 +14,14 @@ package org.sonatype.ossindex.service.client.internal;
 
 import java.net.URI;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
-import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.sonatype.ossindex.service.api.componentreport.ComponentReport;
 import org.sonatype.ossindex.service.api.componentreport.ComponentReportRequest;
@@ -110,7 +112,8 @@ public class OssindexClientImpl
     log.debug("Requesting {} component-reports", coordinates.size());
     Stopwatch watch = Stopwatch.createStarted();
 
-    Map<PackageUrl, ComponentReport> results = new LinkedHashMap<>();
+    // coordinates -> component-report lookup
+    Map<PackageUrl, ComponentReport> purlReports = new HashMap<>(coordinates.size());
 
     // resolve cached reports and generate list of un-cached requests
     List<PackageUrl> uncached = new LinkedList<>();
@@ -118,7 +121,7 @@ public class OssindexClientImpl
       ComponentReport report = reportCache.getIfPresent(purl);
       if (report != null) {
         log.debug("Found cached report for: {}", purl);
-        results.put(purl, report);
+        purlReports.put(purl, report);
       }
       else {
         uncached.add(purl);
@@ -127,7 +130,7 @@ public class OssindexClientImpl
 
     // request any un-cached reports in batches and append to cache
     if (!uncached.isEmpty()) {
-      LinkedHashSet<PackageUrl> batch = new LinkedHashSet<>(batchSize);
+      Set<PackageUrl> batch = new HashSet<>(batchSize);
 
       Iterator<PackageUrl> iter = uncached.iterator();
       while (iter.hasNext()) {
@@ -137,10 +140,16 @@ public class OssindexClientImpl
         if (batch.size() == batchSize || !iter.hasNext()) {
           Map<PackageUrl, ComponentReport> reports = doRequestComponentReports(batch);
           reportCache.putAll(reports);
-          results.putAll(reports);
+          purlReports.putAll(reports);
           batch.clear();
         }
       }
+    }
+
+    // reform results in the same order as given coordinates
+    Map<PackageUrl, ComponentReport> results = new LinkedHashMap<>(coordinates.size());
+    for (PackageUrl purl : coordinates) {
+      results.put(purl, purlReports.get(purl));
     }
 
     log.debug("{} component-reports; {}", results.size(), watch);
@@ -148,14 +157,13 @@ public class OssindexClientImpl
     return results;
   }
 
+  @SuppressWarnings("UnstableApiUsage")
   private static final TypeToken<List<ComponentReport>> LIST_COMPONENT_REPORT = new TypeToken<List<ComponentReport>>() { };
 
   /**
    * Fetch component reports.
-   *
-   * Input order is important, so we must have a ordered unique-set of coordinates so we can correlate.
    */
-  private Map<PackageUrl, ComponentReport> doRequestComponentReports(final LinkedHashSet<PackageUrl> coordinates)
+  private Map<PackageUrl, ComponentReport> doRequestComponentReports(final Set<PackageUrl> coordinates)
       throws Exception
   {
     log.debug("Requesting {} un-cached component-reports", coordinates.size());
@@ -171,15 +179,12 @@ public class OssindexClientImpl
     checkState(reports.size() == coordinates.size(),
         "Result size mismatch; expected: %s, have: %s", coordinates.size(), reports.size());
 
-    // correlate input coordinates to report, as report could have a different form of the coordinates?
-    log.debug("Correlating {} coordinates to {} reports", coordinates.size(), reports.size());
-    Map<PackageUrl, ComponentReport> results = new LinkedHashMap<>();
-    int i = 0;
-    for (PackageUrl purl : coordinates) {
-      ComponentReport report = reports.get(i++);
-      log.debug("  {} -> {}", purl, report.getCoordinates());
-      results.put(purl, report);
+    // map coordinates to report
+    Map<PackageUrl,ComponentReport> results = new HashMap<>(coordinates.size());
+    for (ComponentReport report : reports) {
+      results.put(report.getCoordinates(), report);
     }
+
     return results;
   }
 
@@ -188,7 +193,7 @@ public class OssindexClientImpl
     checkNotNull(coordinates);
     Map<PackageUrl, ComponentReport> reports = requestComponentReports(Collections.singletonList(coordinates));
     ComponentReport result = reports.get(coordinates);
-    checkState(result != null);
+    checkState(result != null, "Missing component-report for singleton request");
     return result;
   }
 }
