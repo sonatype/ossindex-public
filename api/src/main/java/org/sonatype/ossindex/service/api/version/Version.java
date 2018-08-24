@@ -46,14 +46,14 @@ public class Version
   private String buildTag;
 
   /**
-   * @since ???
+   * @since 1.0.3
    */
   @ApiModelProperty("Build notes")
   @JsonProperty
   private String buildNotes;
 
   /**
-   * @since ???
+   * @since 1.0.3
    */
   public Version(final String version, final String buildTimestamp, final String buildTag, final String buildNotes) {
     this.version = version;
@@ -91,14 +91,14 @@ public class Version
   }
 
   /**
-   * @since ???
+   * @since 1.0.3
    */
   public String getBuildNotes() {
     return buildNotes;
   }
 
   /**
-   * @since ???
+   * @since 1.0.3
    */
   public void setBuildNotes(final String buildNotes) {
     this.buildNotes = buildNotes;
