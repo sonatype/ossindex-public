@@ -16,6 +16,11 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
+
 import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
 import static org.sonatype.ossindex.service.api.version.VersionMediaTypes.VERSION_V1_JSON;
 
@@ -25,9 +30,15 @@ import static org.sonatype.ossindex.service.api.version.VersionMediaTypes.VERSIO
  * @since 1.0.0
  */
 @Path("/api/v3/version")
+@Api(value = "Version")
 public interface VersionEndpoint
 {
   @GET
-  @Produces(value = {VERSION_V1_JSON, APPLICATION_JSON})
+  @Produces({VERSION_V1_JSON, APPLICATION_JSON})
+  @ApiOperation(value = "Get service version information")
+  @ApiResponses({
+      @ApiResponse(code = 200, message = "Version information"),
+      @ApiResponse(code = 429, message = "Too many requests")
+  })
   Version get();
 }

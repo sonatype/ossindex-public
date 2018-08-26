@@ -23,7 +23,12 @@ import javax.ws.rs.Produces;
 
 import org.sonatype.goodies.packageurl.PackageUrl;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
+import io.swagger.annotations.Authorization;
 
 import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
 import static org.sonatype.ossindex.service.api.componentreport.ComponentReportMediaTypes.REPORT_V1_JSON;
@@ -35,16 +40,38 @@ import static org.sonatype.ossindex.service.api.componentreport.ComponentReportM
  * @since 1.0.0
  */
 @Path("/api/v3/component-report")
+@Api(
+    value = "Component vulnerability reports",
+    authorizations = {
+        @Authorization("basicAuth"),
+        @Authorization("apiToken")
+    }
+)
 public interface ComponentReportEndpoint
 {
   @GET
   @Path("{coordinates:.*}")
   @Produces({REPORT_V1_JSON, APPLICATION_JSON})
+  @ApiOperation(value = "Request vulnerability report for component")
+  @ApiResponses({
+      @ApiResponse(code = 200, message = "Vulnerability report for component"),
+      @ApiResponse(code = 404, message = "Component not found"),
+      @ApiResponse(code = 400, message = "Missing coordinates version"),
+      @ApiResponse(code = 429, message = "Too many requests")
+  })
   @SuppressWarnings("RestParamTypeInspection")
-  ComponentReport get(@PathParam("coordinates") @ApiParam("Coordinates") PackageUrl coordinates);
+  ComponentReport get(@PathParam("coordinates") @ApiParam("Coordinates as package-url") PackageUrl coordinates);
 
   @POST
   @Consumes({REQUEST_V1_JSON, APPLICATION_JSON})
   @Produces({REPORT_V1_JSON, APPLICATION_JSON})
+  @ApiOperation(value = "Request vulnerability reports for components")
+  @ApiResponses({
+      @ApiResponse(code = 200, message = "Vulnerability report for components"),
+      @ApiResponse(code = 400, message = "Request for too many components"),
+      @ApiResponse(code = 400, message = "One or more coordinates required"),
+      @ApiResponse(code = 400, message = "Missing coordinates version"),
+      @ApiResponse(code = 429, message = "Too many requests")
+  })
   List<ComponentReport> post(ComponentReportRequest request);
 }
