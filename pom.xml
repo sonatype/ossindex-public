@@ -99,11 +99,16 @@
           <artifactId>maven-javadoc-plugin</artifactId>
           <version>3.0.1</version>
           <configuration>
-            <source>${maven.compiler.source}</source>
+            <source>1.8</source>
             <additionalOptions>
               <!-- Turn off strict javadoc checks in Java-8 -->
               <option>-Xdoclint:none</option>
             </additionalOptions>
+            <links>
+              <link>https://sonatype.github.io/package-url-java/maven/apidocs</link>
+              <link>https://sonatype.github.io/dropwizard-support/maven/apidocs</link>
+              <link>https://jax-rs.github.io/apidocs/2.0.1</link>
+            </links>
           </configuration>
         </plugin>
 
