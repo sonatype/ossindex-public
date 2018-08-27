@@ -35,12 +35,16 @@ import org.sonatype.ossindex.service.client.OssindexClientConfiguration;
 import org.sonatype.ossindex.service.client.ProxyConfiguration;
 
 import com.google.common.io.CharStreams;
-import com.google.common.net.HttpHeaders;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.base.Preconditions.checkState;
+import static com.google.common.net.HttpHeaders.ACCEPT;
+import static com.google.common.net.HttpHeaders.AUTHORIZATION;
+import static com.google.common.net.HttpHeaders.CONTENT_TYPE;
+import static com.google.common.net.HttpHeaders.USER_AGENT;
+import static java.net.HttpURLConnection.HTTP_OK;
 
 /**
  * {@link HttpURLConnection} transport.
@@ -76,8 +80,8 @@ public class HttpUrlConnectionTransport
     connection.setDoOutput(true);
 
     connection.setRequestMethod("POST");
-    connection.setRequestProperty(HttpHeaders.CONTENT_TYPE, payloadType);
-    connection.setRequestProperty(HttpHeaders.ACCEPT, acceptType);
+    connection.setRequestProperty(CONTENT_TYPE, payloadType);
+    connection.setRequestProperty(ACCEPT, acceptType);
 
     log.debug("Connecting to: {}", url);
     try (BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(connection.getOutputStream()))) {
@@ -88,7 +92,7 @@ public class HttpUrlConnectionTransport
     int status = connection.getResponseCode();
     log.trace("Status: {}", status);
 
-    if (status == HttpURLConnection.HTTP_OK) {
+    if (status == HTTP_OK) {
       try (Reader reader = new InputStreamReader(connection.getInputStream())) {
         StringWriter buff = new StringWriter();
         CharStreams.copy(reader, buff);
@@ -104,7 +108,7 @@ public class HttpUrlConnectionTransport
    */
   protected HttpURLConnection connect(final URL url) throws IOException {
     checkNotNull(url);
-    checkState(configuration != null);
+    checkState(configuration != null, "Not initialized");
 
     HttpURLConnection connection = null;
     try {
@@ -116,15 +120,16 @@ public class HttpUrlConnectionTransport
         connection = (HttpURLConnection) url.openConnection();
       }
 
-      connection.setRequestProperty(HttpHeaders.USER_AGENT, userAgent.get());
+      connection.setRequestProperty(USER_AGENT, userAgent.get());
 
       // maybe add authorization headers if configured
       String authorization = BasicAuthHelper.authorizationHeader(configuration.getAuthConfiguration());
       if (authorization != null) {
-        connection.setRequestProperty(HttpHeaders.AUTHORIZATION, authorization);
+        connection.setRequestProperty(AUTHORIZATION, authorization);
       }
     }
     catch (IOException e) {
+      //noinspection ConstantConditions
       if (connection != null) {
         connection.disconnect();
       }

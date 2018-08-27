@@ -14,9 +14,8 @@ package org.sonatype.ossindex.service.client.internal;
 
 import java.lang.reflect.Type;
 
-import org.sonatype.ossindex.service.client.transport.Marshaller;
-
 import org.sonatype.goodies.packageurl.PackageUrl;
+import org.sonatype.ossindex.service.client.transport.Marshaller;
 
 import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
@@ -44,7 +43,6 @@ public class GsonMarshaller
   public GsonMarshaller() {
     gson = new GsonBuilder()
         .registerTypeAdapter(PackageUrl.class, new PackageUrlAdapter())
-        // .registerTypeAdapter(Instant.class, new InstantAdapter())
         .create();
   }
 
@@ -86,23 +84,4 @@ public class GsonMarshaller
       return new JsonPrimitive(value.toString());
     }
   }
-
-  ///**
-  // * Joda-time {@link Instant} adapter.
-  // */
-  //private static class InstantAdapter
-  //    implements JsonDeserializer<Instant>, JsonSerializer<Instant>
-  //{
-  //  @Override
-  //  public Instant deserialize(final JsonElement element, final Type type, final JsonDeserializationContext context)
-  //      throws JsonParseException
-  //  {
-  //    return new Instant(element.getAsLong());
-  //  }
-  //
-  //  @Override
-  //  public JsonElement serialize(final Instant value, final Type type, final JsonSerializationContext context) {
-  //    return new JsonPrimitive(value.getMillis());
-  //  }
-  //}
 }
