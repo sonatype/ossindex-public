@@ -70,7 +70,7 @@
 
     <dionysus.version>1.0.1</dionysus.version>
 
-    <build.notes>unknown</build.notes>
+    <build.notes>t:local, u:${user.name}</build.notes>
   </properties>
 
   <modules>
