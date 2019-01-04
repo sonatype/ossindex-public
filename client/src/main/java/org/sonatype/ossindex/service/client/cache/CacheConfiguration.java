@@ -10,29 +10,17 @@
  * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the Apache License Version 2.0 for the specific language governing permissions and limitations there under.
  */
-package org.sonatype.ossindex.service.client.transport;
-
-import com.google.common.reflect.TypeToken;
+package org.sonatype.ossindex.service.client.cache;
 
 /**
- * Object marshaller.
+ * {@link Cache} configuration.
  *
- * @since 1.0.0
+ * @since ???
  */
-public interface Marshaller
+public interface CacheConfiguration
 {
   /**
-   * Marshal value to string.
+   * Create cache instance from this configuration.
    */
-  String marshal(Object value);
-
-  /**
-   * Unmarshal value for type.
-   */
-  <T> T unmarshal(String value, Class<T> type);
-
-  /**
-   * Unmarshal value for type.
-   */
-  <T> T unmarshal(String value, TypeToken<T> type);
+  Cache create() throws Exception;
 }

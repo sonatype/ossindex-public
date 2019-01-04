@@ -23,7 +23,11 @@ import org.sonatype.ossindex.service.client.OssindexClientConfiguration;
  * @since 1.0.0
  */
 public interface Transport
+  extends AutoCloseable
 {
+  /**
+   * Initialize transport.
+   */
   void init(final OssindexClientConfiguration configuration);
 
   /**

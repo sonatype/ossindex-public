@@ -30,9 +30,7 @@ import java.net.URL;
 
 import javax.annotation.Nullable;
 
-import org.sonatype.ossindex.service.client.AuthConfiguration;
 import org.sonatype.ossindex.service.client.OssindexClientConfiguration;
-import org.sonatype.ossindex.service.client.ProxyConfiguration;
 
 import com.google.common.io.CharStreams;
 import org.slf4j.Logger;
@@ -67,6 +65,11 @@ public class HttpUrlConnectionTransport
   @Override
   public void init(final OssindexClientConfiguration configuration) {
     this.configuration = checkNotNull(configuration);
+  }
+
+  @Override
+  public void close() throws Exception {
+    // empty
   }
 
   @Override

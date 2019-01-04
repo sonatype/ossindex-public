@@ -10,30 +10,31 @@
  * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the Apache License Version 2.0 for the specific language governing permissions and limitations there under.
  */
-package org.sonatype.ossindex.service.client;
+package org.sonatype.ossindex.service.client.cache;
 
-import java.util.List;
 import java.util.Map;
 
-import org.sonatype.ossindex.service.api.componentreport.ComponentReport;
+import javax.annotation.Nullable;
 
 import org.sonatype.goodies.packageurl.PackageUrl;
+import org.sonatype.ossindex.service.api.componentreport.ComponentReport;
 
 /**
- * Sonatype OSS Index client.
+ * {@link PackageUrl} to {@link ComponentReport} cache.
  *
- * @since 1.0.0
+ * @since ???
  */
-public interface OssindexClient
+public interface Cache
   extends AutoCloseable
 {
   /**
-   * Request component reports for coordinates.
+   * Return cached report for given coordinates or {@literal null} if not cached.
    */
-  Map<PackageUrl, ComponentReport> requestComponentReports(List<PackageUrl> coordinates) throws Exception;
+  @Nullable
+  ComponentReport getIfPresent(PackageUrl coordinates);
 
   /**
-   * Request component report for coordinates.
+   * Add cached reports.
    */
-  ComponentReport requestComponentReport(PackageUrl coordinates) throws Exception;
+  void putAll(Map<PackageUrl, ComponentReport> reports);
 }

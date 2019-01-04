@@ -27,14 +27,15 @@ import org.sonatype.ossindex.service.api.componentreport.ComponentReport;
 import org.sonatype.ossindex.service.api.componentreport.ComponentReportRequest;
 import org.sonatype.ossindex.service.client.OssindexClient;
 import org.sonatype.ossindex.service.client.OssindexClientConfiguration;
-import org.sonatype.ossindex.service.client.transport.Marshaller;
+import org.sonatype.ossindex.service.client.cache.CacheConfiguration;
+import org.sonatype.ossindex.service.client.cache.Cache;
+import org.sonatype.ossindex.service.client.cache.MemoryCache;
+import org.sonatype.ossindex.service.client.marshal.Marshaller;
 import org.sonatype.ossindex.service.client.transport.Transport;
 
 import org.sonatype.goodies.packageurl.PackageUrl;
 
 import com.google.common.base.Stopwatch;
-import com.google.common.cache.Cache;
-import com.google.common.cache.CacheBuilder;
 import com.google.common.collect.ImmutableList;
 import com.google.common.reflect.TypeToken;
 import org.slf4j.Logger;
@@ -60,9 +61,9 @@ public class OssindexClientImpl
 
   private final Marshaller marshaller;
 
-  private final URI baseUrl;
+  private final Cache reportCache;
 
-  private final Cache<PackageUrl, ComponentReport> reportCache;
+  private final URI baseUrl;
 
   private final int batchSize;
 
@@ -79,19 +80,47 @@ public class OssindexClientImpl
     log.debug("Marshaller: {}", marshaller);
 
     checkState(config.getBaseUrl() != null, "Base-URL required");
-    baseUrl = normalize(config.getBaseUrl());
+    this.baseUrl = normalize(config.getBaseUrl());
     log.debug("Base URL: {}", baseUrl);
 
-    checkState(config.getReportCache() != null, "Report cache required");
-    log.debug("Report cache: {}", config.getReportCache());
-    reportCache = CacheBuilder.from(config.getReportCache()).build();
-
     checkState(config.getBatchSize() > 0 && config.getBatchSize() <= 1024, "Batch-size out of range");
-    batchSize = config.getBatchSize();
+    this.batchSize = config.getBatchSize();
     log.debug("Batch size: {}", batchSize);
 
-    // inform transport of configuration
-    transport.init(config);
+    // initialize components
+    try {
+      CacheConfiguration cacheConfiguration = config.getCacheConfiguration();
+      if (cacheConfiguration == null) {
+        cacheConfiguration = new MemoryCache.Configuration();
+      }
+      this.reportCache = cacheConfiguration.create();
+      log.debug("Report cache: {}", reportCache);
+
+      transport.init(config);
+    }
+    catch (Exception e) {
+      throw new RuntimeException(e);
+    }
+  }
+
+  /**
+   * @since ???
+   */
+  @Override
+  public void close() throws Exception {
+    try {
+      transport.close();
+    }
+    catch (Exception e) {
+      log.error("Failed to close transport", e);
+    }
+
+    try {
+      reportCache.close();
+    }
+    catch (Exception e) {
+      log.error("Failed to close report-cache", e);
+    }
   }
 
   /**

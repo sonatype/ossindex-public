@@ -16,8 +16,6 @@ import java.io.UnsupportedEncodingException;
 
 import javax.annotation.Nullable;
 
-import org.sonatype.ossindex.service.client.AuthConfiguration;
-
 import com.google.common.io.BaseEncoding;
 
 import static com.google.common.base.Preconditions.checkState;

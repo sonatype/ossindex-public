@@ -16,9 +16,7 @@ import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URI;
 
-import org.sonatype.ossindex.service.client.AuthConfiguration;
 import org.sonatype.ossindex.service.client.OssindexClientConfiguration;
-import org.sonatype.ossindex.service.client.ProxyConfiguration;
 
 import com.google.common.base.Charsets;
 import com.google.common.net.HttpHeaders;
@@ -63,6 +61,11 @@ public class HttpClientTransport
   @Override
   public void init(final OssindexClientConfiguration configuration) {
     this.configuration = checkNotNull(configuration);
+  }
+
+  @Override
+  public void close() throws Exception {
+    // empty
   }
 
   // TODO: check if we need to use httpclient.execute(request,context) form?

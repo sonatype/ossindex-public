@@ -16,8 +16,11 @@ import java.net.URI;
 
 import javax.annotation.Nullable;
 
+import org.sonatype.ossindex.service.client.cache.CacheConfiguration;
+import org.sonatype.ossindex.service.client.transport.AuthConfiguration;
+import org.sonatype.ossindex.service.client.transport.ProxyConfiguration;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.google.common.cache.CacheBuilderSpec;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
@@ -38,21 +41,11 @@ public class OssindexClientConfiguration
    */
   public static final int DEFAULT_BATCH_SIZE = 128;
 
-  /**
-   * Default cache configuration.
-   */
-  public static final CacheBuilderSpec DEFAULT_CACHE = CacheBuilderSpec.parse(
-      "maximumSize=256,expireAfterAccess=2m,softValues"
-  );
-
   @JsonProperty
   private URI baseUrl = DEFAULT_BASE_URL;
 
   @JsonProperty
   private int batchSize = DEFAULT_BATCH_SIZE;
-
-  @JsonProperty
-  private CacheBuilderSpec reportCache = DEFAULT_CACHE;
 
   @Nullable
   @JsonProperty("auth")
@@ -62,6 +55,10 @@ public class OssindexClientConfiguration
   @JsonProperty("proxy")
   private ProxyConfiguration proxyConfiguration;
 
+  @Nullable
+  @JsonProperty("cache")
+  private CacheConfiguration cacheConfiguration;
+  
   /**
    * Returns the base URL for the OSS Index service.
    */
@@ -99,21 +96,7 @@ public class OssindexClientConfiguration
   }
 
   /**
-   * Returns the cache configuration.
-   */
-  public CacheBuilderSpec getReportCache() {
-    return reportCache;
-  }
-
-  /**
-   * Set the cache configuration.
-   */
-  public void setReportCache(final CacheBuilderSpec reportCache) {
-    this.reportCache = checkNotNull(reportCache);
-  }
-
-  /**
-   * Returns the authentication configuration; or {@code null} if not configured.
+   * Returns the authentication configuration; or {@literal null} if not configured.
    */
   @Nullable
   public AuthConfiguration getAuthConfiguration() {
@@ -121,14 +104,14 @@ public class OssindexClientConfiguration
   }
 
   /**
-   * Set the authentication configuration; or {@code null} to disable.
+   * Set the authentication configuration; or {@literal null} to disable.
    */
   public void setAuthConfiguration(@Nullable final AuthConfiguration authConfiguration) {
     this.authConfiguration = authConfiguration;
   }
 
   /**
-   * Returns the proxy configuration; or {@code null} if not configured.
+   * Returns the proxy configuration; or {@literal null} if not configured.
    */
   @Nullable
   public ProxyConfiguration getProxyConfiguration() {
@@ -136,9 +119,24 @@ public class OssindexClientConfiguration
   }
 
   /**
-   * Set the proxy configuration; or {@code null} to disable.
+   * Set the proxy configuration; or {@literal null} to disable.
    */
   public void setProxyConfiguration(@Nullable final ProxyConfiguration proxyConfiguration) {
     this.proxyConfiguration = proxyConfiguration;
+  }
+
+  /**
+   * Returns the cache cache configuration; or {@literal null} if not configured.
+   */
+  @Nullable
+  public CacheConfiguration getCacheConfiguration() {
+    return cacheConfiguration;
+  }
+
+  /**
+   * Set the cache configuration; or {@literal null} for default.
+   */
+  public void setCacheConfiguration(@Nullable final CacheConfiguration cacheConfiguration) {
+    this.cacheConfiguration = cacheConfiguration;
   }
 }

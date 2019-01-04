@@ -10,12 +10,14 @@
  * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the Apache License Version 2.0 for the specific language governing permissions and limitations there under.
  */
-package org.sonatype.ossindex.service.client.internal;
+package org.sonatype.ossindex.service.client.marshal;
 
+import java.io.IOException;
+import java.io.Reader;
+import java.io.Writer;
 import java.lang.reflect.Type;
 
 import org.sonatype.goodies.packageurl.PackageUrl;
-import org.sonatype.ossindex.service.client.transport.Marshaller;
 
 import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
@@ -53,6 +55,13 @@ public class GsonMarshaller
   }
 
   @Override
+  public void marshal(final Object value, final Writer writer) throws IOException {
+    checkNotNull(value);
+    gson.toJson(value, writer);
+    writer.flush();
+  }
+
+  @Override
   public <T> T unmarshal(final String value, final Class<T> type) {
     checkNotNull(value);
     checkNotNull(type);
@@ -64,6 +73,20 @@ public class GsonMarshaller
     checkNotNull(value);
     checkNotNull(type);
     return gson.fromJson(value, type.getType());
+  }
+
+  @Override
+  public <T> T unmarshal(final Reader reader, final Class<T> type) throws IOException {
+    checkNotNull(reader);
+    checkNotNull(type);
+    return gson.fromJson(reader, type);
+  }
+
+  @Override
+  public <T> T unmarshal(final Reader reader, final TypeToken<T> type) throws IOException {
+    checkNotNull(reader);
+    checkNotNull(type);
+    return gson.fromJson(reader, type.getType());
   }
 
   /**
