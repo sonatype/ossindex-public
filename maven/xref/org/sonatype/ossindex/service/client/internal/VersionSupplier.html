@@ -11,7 +11,7 @@
 <a class="jxr_linenumber" name="L3" href="#L3">3</a>   <em class="jxr_comment"> *</em>
 <a class="jxr_linenumber" name="L4" href="#L4">4</a>   <em class="jxr_comment"> * This program is licensed to you under the Apache License Version 2.0,</em>
 <a class="jxr_linenumber" name="L5" href="#L5">5</a>   <em class="jxr_comment"> * and you may not use this file except in compliance with the Apache License Version 2.0.</em>
-<a class="jxr_linenumber" name="L6" href="#L6">6</a>   <em class="jxr_comment"> * You may obtain a copy of the Apache License Version 2.0 at <a href="http://www.apache.org/licenses/LICENSE-2.0" target="alexandria_uri">http://www.apache.org/licenses/LICENSE-2.0</a>.</em>
+<a class="jxr_linenumber" name="L6" href="#L6">6</a>   <em class="jxr_comment"> * You may obtain a copy of the Apache License Version 2.0 at <a href="http://www.apache.org/licenses/LICENSE-2.0." target="alexandria_uri">http://www.apache.org/licenses/LICENSE-2.0.</a></em>
 <a class="jxr_linenumber" name="L7" href="#L7">7</a>   <em class="jxr_comment"> *</em>
 <a class="jxr_linenumber" name="L8" href="#L8">8</a>   <em class="jxr_comment"> * Unless required by applicable law or agreed to in writing,</em>
 <a class="jxr_linenumber" name="L9" href="#L9">9</a>   <em class="jxr_comment"> * software distributed under the Apache License Version 2.0 is distributed on an</em>
@@ -27,21 +27,21 @@
 <a class="jxr_linenumber" name="L19" href="#L19">19</a>  <em class="jxr_javadoccomment"> *</em>
 <a class="jxr_linenumber" name="L20" href="#L20">20</a>  <em class="jxr_javadoccomment"> * @since 1.0.0</em>
 <a class="jxr_linenumber" name="L21" href="#L21">21</a>  <em class="jxr_javadoccomment"> */</em>
-<a class="jxr_linenumber" name="L22" href="#L22">22</a>  <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">class</strong> <a href="../../../../../../org/sonatype/ossindex/service/client/internal/VersionSupplier.html">VersionSupplier</a>
+<a class="jxr_linenumber" name="L22" href="#L22">22</a>  <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">class</strong> <a name="VersionSupplier" href="../../../../../../org/sonatype/ossindex/service/client/internal/VersionSupplier.html#VersionSupplier">VersionSupplier</a>
 <a class="jxr_linenumber" name="L23" href="#L23">23</a>      <strong class="jxr_keyword">implements</strong> Supplier&lt;Version&gt;
 <a class="jxr_linenumber" name="L24" href="#L24">24</a>  {
-<a class="jxr_linenumber" name="L25" href="#L25">25</a>    <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">volatile</strong> <a href="../../../../../../org/sonatype/ossindex/service/client/internal/Version.html">Version</a> instance;
+<a class="jxr_linenumber" name="L25" href="#L25">25</a>    <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">volatile</strong> <a name="Version" href="../../../../../../org/sonatype/ossindex/service/client/internal/Version.html#Version">Version</a> instance;
 <a class="jxr_linenumber" name="L26" href="#L26">26</a>  
 <a class="jxr_linenumber" name="L27" href="#L27">27</a>    @Override
-<a class="jxr_linenumber" name="L28" href="#L28">28</a>    <strong class="jxr_keyword">public</strong> <a href="../../../../../../org/sonatype/ossindex/service/client/internal/Version.html">Version</a> get() {
+<a class="jxr_linenumber" name="L28" href="#L28">28</a>    <strong class="jxr_keyword">public</strong> <a name="Version" href="../../../../../../org/sonatype/ossindex/service/client/internal/Version.html#Version">Version</a> get() {
 <a class="jxr_linenumber" name="L29" href="#L29">29</a>      <strong class="jxr_keyword">if</strong> (instance == <strong class="jxr_keyword">null</strong>) {
-<a class="jxr_linenumber" name="L30" href="#L30">30</a>        instance = <strong class="jxr_keyword">new</strong> <a href="../../../../../../org/sonatype/ossindex/service/client/internal/Version.html">Version</a>(VersionSupplier.<strong class="jxr_keyword">class</strong>);
+<a class="jxr_linenumber" name="L30" href="#L30">30</a>        instance = <strong class="jxr_keyword">new</strong> <a name="Version" href="../../../../../../org/sonatype/ossindex/service/client/internal/Version.html#Version">Version</a>(VersionSupplier.<strong class="jxr_keyword">class</strong>);
 <a class="jxr_linenumber" name="L31" href="#L31">31</a>      }
 <a class="jxr_linenumber" name="L32" href="#L32">32</a>      <strong class="jxr_keyword">return</strong> instance;
 <a class="jxr_linenumber" name="L33" href="#L33">33</a>    }
 <a class="jxr_linenumber" name="L34" href="#L34">34</a>  }
 </pre>
 <hr/>
-<div id="footer">Copyright &#169; 2018 <a href="http://www.sonatype.com">Sonatype, Inc.</a>. All rights reserved.</div>
+<div id="footer">Copyright &#169; 2018&#x2013;2019 <a href="http://www.sonatype.com">Sonatype, Inc.</a>. All rights reserved.</div>
 </body>
 </html>

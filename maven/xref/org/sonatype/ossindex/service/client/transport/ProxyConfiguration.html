@@ -2,23 +2,23 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en_US" lang="en_US">
 <head><meta http-equiv="content-type" content="text/html; charset=UTF-8" />
 <title>ProxyConfiguration xref</title>
-<link type="text/css" rel="stylesheet" href="../../../../../stylesheet.css" />
+<link type="text/css" rel="stylesheet" href="../../../../../../stylesheet.css" />
 </head>
 <body>
-<div id="overview"><a href="../../../../../../apidocs/org/sonatype/ossindex/service/client/ProxyConfiguration.html">View Javadoc</a></div><pre>
+<div id="overview"><a href="../../../../../../../apidocs/org/sonatype/ossindex/service/client/transport/ProxyConfiguration.html">View Javadoc</a></div><pre>
 <a class="jxr_linenumber" name="L1" href="#L1">1</a>   <em class="jxr_comment">/*</em>
 <a class="jxr_linenumber" name="L2" href="#L2">2</a>   <em class="jxr_comment"> * Copyright (c) 2018-present Sonatype, Inc. All rights reserved.</em>
 <a class="jxr_linenumber" name="L3" href="#L3">3</a>   <em class="jxr_comment"> *</em>
 <a class="jxr_linenumber" name="L4" href="#L4">4</a>   <em class="jxr_comment"> * This program is licensed to you under the Apache License Version 2.0,</em>
 <a class="jxr_linenumber" name="L5" href="#L5">5</a>   <em class="jxr_comment"> * and you may not use this file except in compliance with the Apache License Version 2.0.</em>
-<a class="jxr_linenumber" name="L6" href="#L6">6</a>   <em class="jxr_comment"> * You may obtain a copy of the Apache License Version 2.0 at <a href="http://www.apache.org/licenses/LICENSE-2.0" target="alexandria_uri">http://www.apache.org/licenses/LICENSE-2.0</a>.</em>
+<a class="jxr_linenumber" name="L6" href="#L6">6</a>   <em class="jxr_comment"> * You may obtain a copy of the Apache License Version 2.0 at <a href="http://www.apache.org/licenses/LICENSE-2.0." target="alexandria_uri">http://www.apache.org/licenses/LICENSE-2.0.</a></em>
 <a class="jxr_linenumber" name="L7" href="#L7">7</a>   <em class="jxr_comment"> *</em>
 <a class="jxr_linenumber" name="L8" href="#L8">8</a>   <em class="jxr_comment"> * Unless required by applicable law or agreed to in writing,</em>
 <a class="jxr_linenumber" name="L9" href="#L9">9</a>   <em class="jxr_comment"> * software distributed under the Apache License Version 2.0 is distributed on an</em>
 <a class="jxr_linenumber" name="L10" href="#L10">10</a>  <em class="jxr_comment"> * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</em>
 <a class="jxr_linenumber" name="L11" href="#L11">11</a>  <em class="jxr_comment"> * See the Apache License Version 2.0 for the specific language governing permissions and limitations there under.</em>
 <a class="jxr_linenumber" name="L12" href="#L12">12</a>  <em class="jxr_comment"> */</em>
-<a class="jxr_linenumber" name="L13" href="#L13">13</a>  <strong class="jxr_keyword">package</strong> org.sonatype.ossindex.service.client;
+<a class="jxr_linenumber" name="L13" href="#L13">13</a>  <strong class="jxr_keyword">package</strong> org.sonatype.ossindex.service.client.transport;
 <a class="jxr_linenumber" name="L14" href="#L14">14</a>  
 <a class="jxr_linenumber" name="L15" href="#L15">15</a>  <strong class="jxr_keyword">import</strong> javax.annotation.Nonnull;
 <a class="jxr_linenumber" name="L16" href="#L16">16</a>  <strong class="jxr_keyword">import</strong> javax.annotation.Nullable;
@@ -32,7 +32,7 @@
 <a class="jxr_linenumber" name="L24" href="#L24">24</a>  <em class="jxr_javadoccomment"> *</em>
 <a class="jxr_linenumber" name="L25" href="#L25">25</a>  <em class="jxr_javadoccomment"> * @since 1.0.0</em>
 <a class="jxr_linenumber" name="L26" href="#L26">26</a>  <em class="jxr_javadoccomment"> */</em>
-<a class="jxr_linenumber" name="L27" href="#L27">27</a>  <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">class</strong> <a href="../../../../../org/sonatype/ossindex/service/client/ProxyConfiguration.html">ProxyConfiguration</a>
+<a class="jxr_linenumber" name="L27" href="#L27">27</a>  <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">class</strong> <a name="ProxyConfiguration" href="../../../../../../org/sonatype/ossindex/service/client/transport/ProxyConfiguration.html#ProxyConfiguration">ProxyConfiguration</a>
 <a class="jxr_linenumber" name="L28" href="#L28">28</a>  {
 <a class="jxr_linenumber" name="L29" href="#L29">29</a>    <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">final</strong> String HTTP = <span class="jxr_string">"http"</span>;
 <a class="jxr_linenumber" name="L30" href="#L30">30</a>  
@@ -56,7 +56,7 @@
 <a class="jxr_linenumber" name="L48" href="#L48">48</a>  
 <a class="jxr_linenumber" name="L49" href="#L49">49</a>    @Nullable
 <a class="jxr_linenumber" name="L50" href="#L50">50</a>    @JsonProperty(<span class="jxr_string">"auth"</span>)
-<a class="jxr_linenumber" name="L51" href="#L51">51</a>    <strong class="jxr_keyword">private</strong> <a href="../../../../../org/sonatype/ossindex/service/client/AuthConfiguration.html">AuthConfiguration</a> authConfiguration;
+<a class="jxr_linenumber" name="L51" href="#L51">51</a>    <strong class="jxr_keyword">private</strong> <a name="AuthConfiguration" href="../../../../../../org/sonatype/ossindex/service/client/transport/AuthConfiguration.html#AuthConfiguration">AuthConfiguration</a> authConfiguration;
 <a class="jxr_linenumber" name="L52" href="#L52">52</a>  
 <a class="jxr_linenumber" name="L53" href="#L53">53</a>    @Nonnull
 <a class="jxr_linenumber" name="L54" href="#L54">54</a>    <strong class="jxr_keyword">public</strong> String getProtocol() {
@@ -95,16 +95,16 @@
 <a class="jxr_linenumber" name="L87" href="#L87">87</a>    }
 <a class="jxr_linenumber" name="L88" href="#L88">88</a>  
 <a class="jxr_linenumber" name="L89" href="#L89">89</a>    @Nullable
-<a class="jxr_linenumber" name="L90" href="#L90">90</a>    <strong class="jxr_keyword">public</strong> <a href="../../../../../org/sonatype/ossindex/service/client/AuthConfiguration.html">AuthConfiguration</a> getAuthConfiguration() {
+<a class="jxr_linenumber" name="L90" href="#L90">90</a>    <strong class="jxr_keyword">public</strong> <a name="AuthConfiguration" href="../../../../../../org/sonatype/ossindex/service/client/transport/AuthConfiguration.html#AuthConfiguration">AuthConfiguration</a> getAuthConfiguration() {
 <a class="jxr_linenumber" name="L91" href="#L91">91</a>      <strong class="jxr_keyword">return</strong> authConfiguration;
 <a class="jxr_linenumber" name="L92" href="#L92">92</a>    }
 <a class="jxr_linenumber" name="L93" href="#L93">93</a>  
-<a class="jxr_linenumber" name="L94" href="#L94">94</a>    <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> setAuthConfiguration(@Nullable <strong class="jxr_keyword">final</strong> <a href="../../../../../org/sonatype/ossindex/service/client/AuthConfiguration.html">AuthConfiguration</a> authConfiguration) {
+<a class="jxr_linenumber" name="L94" href="#L94">94</a>    <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> setAuthConfiguration(@Nullable <strong class="jxr_keyword">final</strong> <a name="AuthConfiguration" href="../../../../../../org/sonatype/ossindex/service/client/transport/AuthConfiguration.html#AuthConfiguration">AuthConfiguration</a> authConfiguration) {
 <a class="jxr_linenumber" name="L95" href="#L95">95</a>      <strong class="jxr_keyword">this</strong>.authConfiguration = authConfiguration;
 <a class="jxr_linenumber" name="L96" href="#L96">96</a>    }
 <a class="jxr_linenumber" name="L97" href="#L97">97</a>  }
 </pre>
 <hr/>
-<div id="footer">Copyright &#169; 2018 <a href="http://www.sonatype.com">Sonatype, Inc.</a>. All rights reserved.</div>
+<div id="footer">Copyright &#169; 2018&#x2013;2019 <a href="http://www.sonatype.com">Sonatype, Inc.</a>. All rights reserved.</div>
 </body>
 </html>

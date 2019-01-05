@@ -11,7 +11,7 @@
 <a class="jxr_linenumber" name="L3" href="#L3">3</a>   <em class="jxr_comment"> *</em>
 <a class="jxr_linenumber" name="L4" href="#L4">4</a>   <em class="jxr_comment"> * This program is licensed to you under the Apache License Version 2.0,</em>
 <a class="jxr_linenumber" name="L5" href="#L5">5</a>   <em class="jxr_comment"> * and you may not use this file except in compliance with the Apache License Version 2.0.</em>
-<a class="jxr_linenumber" name="L6" href="#L6">6</a>   <em class="jxr_comment"> * You may obtain a copy of the Apache License Version 2.0 at <a href="http://www.apache.org/licenses/LICENSE-2.0" target="alexandria_uri">http://www.apache.org/licenses/LICENSE-2.0</a>.</em>
+<a class="jxr_linenumber" name="L6" href="#L6">6</a>   <em class="jxr_comment"> * You may obtain a copy of the Apache License Version 2.0 at <a href="http://www.apache.org/licenses/LICENSE-2.0." target="alexandria_uri">http://www.apache.org/licenses/LICENSE-2.0.</a></em>
 <a class="jxr_linenumber" name="L7" href="#L7">7</a>   <em class="jxr_comment"> *</em>
 <a class="jxr_linenumber" name="L8" href="#L8">8</a>   <em class="jxr_comment"> * Unless required by applicable law or agreed to in writing,</em>
 <a class="jxr_linenumber" name="L9" href="#L9">9</a>   <em class="jxr_comment"> * software distributed under the Apache License Version 2.0 is distributed on an</em>
@@ -35,7 +35,7 @@
 <a class="jxr_linenumber" name="L27" href="#L27">27</a>  <em class="jxr_javadoccomment"> *</em>
 <a class="jxr_linenumber" name="L28" href="#L28">28</a>  <em class="jxr_javadoccomment"> * @since 1.0.0</em>
 <a class="jxr_linenumber" name="L29" href="#L29">29</a>  <em class="jxr_javadoccomment"> */</em>
-<a class="jxr_linenumber" name="L30" href="#L30">30</a>  <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">class</strong> <a href="../../../../../../org/sonatype/ossindex/service/client/transport/UserAgentSupplier.html">UserAgentSupplier</a>
+<a class="jxr_linenumber" name="L30" href="#L30">30</a>  <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">class</strong> <a name="UserAgentSupplier" href="../../../../../../org/sonatype/ossindex/service/client/transport/UserAgentSupplier.html#UserAgentSupplier">UserAgentSupplier</a>
 <a class="jxr_linenumber" name="L31" href="#L31">31</a>      <strong class="jxr_keyword">implements</strong> Supplier&lt;String&gt;
 <a class="jxr_linenumber" name="L32" href="#L32">32</a>  {
 <a class="jxr_linenumber" name="L33" href="#L33">33</a>    <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">final</strong> Logger log = LoggerFactory.getLogger(UserAgentSupplier.<strong class="jxr_keyword">class</strong>);
@@ -47,17 +47,17 @@
 <a class="jxr_linenumber" name="L39" href="#L39">39</a>  
 <a class="jxr_linenumber" name="L40" href="#L40">40</a>    <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">final</strong> String value;
 <a class="jxr_linenumber" name="L41" href="#L41">41</a>  
-<a class="jxr_linenumber" name="L42" href="#L42">42</a>    <strong class="jxr_keyword">public</strong> <a href="../../../../../../org/sonatype/ossindex/service/client/transport/UserAgentSupplier.html">UserAgentSupplier</a>(<strong class="jxr_keyword">final</strong> <a href="../../../../../../org/sonatype/ossindex/service/client/internal/Version.html">Version</a> version) {
+<a class="jxr_linenumber" name="L42" href="#L42">42</a>    <strong class="jxr_keyword">public</strong> <a name="UserAgentSupplier" href="../../../../../../org/sonatype/ossindex/service/client/transport/UserAgentSupplier.html#UserAgentSupplier">UserAgentSupplier</a>(<strong class="jxr_keyword">final</strong> <a name="Version" href="../../../../../../org/sonatype/ossindex/service/client/internal/Version.html#Version">Version</a> version) {
 <a class="jxr_linenumber" name="L43" href="#L43">43</a>      <strong class="jxr_keyword">this</strong>(PRODUCT, version.getVersion());
 <a class="jxr_linenumber" name="L44" href="#L44">44</a>    }
 <a class="jxr_linenumber" name="L45" href="#L45">45</a>  
 <a class="jxr_linenumber" name="L46" href="#L46">46</a>    @VisibleForTesting
-<a class="jxr_linenumber" name="L47" href="#L47">47</a>    <strong class="jxr_keyword">public</strong> <a href="../../../../../../org/sonatype/ossindex/service/client/transport/UserAgentSupplier.html">UserAgentSupplier</a>(<strong class="jxr_keyword">final</strong> String product, <strong class="jxr_keyword">final</strong> String version) {
+<a class="jxr_linenumber" name="L47" href="#L47">47</a>    <strong class="jxr_keyword">public</strong> <a name="UserAgentSupplier" href="../../../../../../org/sonatype/ossindex/service/client/transport/UserAgentSupplier.html#UserAgentSupplier">UserAgentSupplier</a>(<strong class="jxr_keyword">final</strong> String product, <strong class="jxr_keyword">final</strong> String version) {
 <a class="jxr_linenumber" name="L48" href="#L48">48</a>      checkNotNull(product);
 <a class="jxr_linenumber" name="L49" href="#L49">49</a>      checkNotNull(version);
 <a class="jxr_linenumber" name="L50" href="#L50">50</a>  
-<a class="jxr_linenumber" name="L51" href="#L51">51</a>      <a href="../../../../../../org/sonatype/ossindex/service/client/transport/UserAgentBuilder.html">UserAgentBuilder</a> builder = <strong class="jxr_keyword">new</strong> <a href="../../../../../../org/sonatype/ossindex/service/client/transport/UserAgentBuilder.html">UserAgentBuilder</a>().product(
-<a class="jxr_linenumber" name="L52" href="#L52">52</a>          <strong class="jxr_keyword">new</strong> <a href="../../../../../../org/sonatype/ossindex/service/client/transport/UserAgentBuilder.html">Product</a>(product, version).comment(
+<a class="jxr_linenumber" name="L51" href="#L51">51</a>      <a name="UserAgentBuilder" href="../../../../../../org/sonatype/ossi<a name="UserAgentBuilder" href="../../../../../../org/sonatype/ossindex/service/client/transport/UserAgentBuilder.html#UserAgentBuilder">UserAgentBuilder</a>ent/transport/UserAgentBuilder.html#UserAgentBuilder">UserAgentBuilder</a> builder = <strong class="jxr_keyword">new</strong> <a name="UserAgentBuilder" href="../../../../../../org/sonatype/ossindex/service/client/transport/UserAgentBuilder.html#UserAgentBuilder">UserAgentBuilder</a>().product(
+<a class="jxr_linenumber" name="L52" href="#L52">52</a>          <strong class="jxr_keyword">new</strong> Product(product, version).comment(
 <a class="jxr_linenumber" name="L53" href="#L53">53</a>              System.getProperty(<span class="jxr_string">"os.name"</span>),
 <a class="jxr_linenumber" name="L54" href="#L54">54</a>              System.getProperty(<span class="jxr_string">"os.version"</span>),
 <a class="jxr_linenumber" name="L55" href="#L55">55</a>              System.getProperty(<span class="jxr_string">"os.arch"</span>),
@@ -74,7 +74,7 @@
 <a class="jxr_linenumber" name="L66" href="#L66">66</a>    <em class="jxr_javadoccomment">/**</em>
 <a class="jxr_linenumber" name="L67" href="#L67">67</a>  <em class="jxr_javadoccomment">   * @since 1.0.2</em>
 <a class="jxr_linenumber" name="L68" href="#L68">68</a>  <em class="jxr_javadoccomment">   */</em>
-<a class="jxr_linenumber" name="L69" href="#L69">69</a>    <strong class="jxr_keyword">protected</strong> <strong class="jxr_keyword">void</strong> customize(<strong class="jxr_keyword">final</strong> <a href="../../../../../../org/sonatype/ossindex/service/client/transport/UserAgentBuilder.html">UserAgentBuilder</a> builder) {
+<a class="jxr_linenumber" name="L69" href="#L69">69</a>    <strong class="jxr_keyword">protected</strong> <strong class="jxr_keyword">void</strong> customize(<strong class="jxr_keyword">final</strong> <a name="UserAgentBuilder" href="../../../../../../org/sonatype/ossindex/service/client/transport/UserAgentBuilder.html#UserAgentBuilder">UserAgentBuilder</a> builder) {
 <a class="jxr_linenumber" name="L70" href="#L70">70</a>      <em class="jxr_comment">// empty</em>
 <a class="jxr_linenumber" name="L71" href="#L71">71</a>    }
 <a class="jxr_linenumber" name="L72" href="#L72">72</a>  
@@ -85,6 +85,6 @@
 <a class="jxr_linenumber" name="L77" href="#L77">77</a>  }
 </pre>
 <hr/>
-<div id="footer">Copyright &#169; 2018 <a href="http://www.sonatype.com">Sonatype, Inc.</a>. All rights reserved.</div>
+<div id="footer">Copyright &#169; 2018&#x2013;2019 <a href="http://www.sonatype.com">Sonatype, Inc.</a>. All rights reserved.</div>
 </body>
 </html>
