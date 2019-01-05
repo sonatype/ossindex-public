@@ -37,7 +37,7 @@ public interface Marshaller
   /**
    * Marshal value to writer.
    *
-   * @since ???
+   * @since 1.1.0
    */
   void marshal(Object value, Writer writer) throws IOException;
 
@@ -58,14 +58,14 @@ public interface Marshaller
   /**
    * Unmarshal value for type.
    *
-   * @since ???
+   * @since 1.1.0
    */
   <T> T unmarshal(Reader reader, Class<T> type) throws IOException;
 
   /**
    * Unmarshal value for type.
    *
-   * @since ???
+   * @since 1.1.0
    */
   <T> T unmarshal(Reader reader, TypeToken<T> type) throws IOException;
 }

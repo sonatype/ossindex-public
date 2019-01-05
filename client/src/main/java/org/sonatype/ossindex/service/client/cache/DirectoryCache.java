@@ -53,7 +53,7 @@ import static com.google.common.base.Preconditions.checkState;
  * Persistent report cache, storing cache entries into a segmented directory structure.
  * Expiration is done via file last-modified timestamp.
  *
- * @since ???
+ * @since 1.1.0
  */
 public class DirectoryCache
     implements Cache

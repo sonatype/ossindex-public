@@ -31,7 +31,7 @@ import static com.google.common.base.Preconditions.checkState;
  *
  * Based on Guava {@link com.google.common.cache.Cache}.
  *
- * @since ???
+ * @since 1.1.0
  */
 public class MemoryCache
     implements Cache

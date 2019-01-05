@@ -29,7 +29,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 /**
  * Helper to return user data base directory location specific to {@link OsType}.
  *
- * @since ???
+ * @since 1.1.0
  */
 public class UserDataLocation
     implements Supplier<Path>

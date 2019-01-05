@@ -18,7 +18,7 @@ import org.slf4j.LoggerFactory;
 /**
  * Helper to detect OS type.
  *
- * @since ???
+ * @since 1.1.0
  */
 public enum OsType
 {

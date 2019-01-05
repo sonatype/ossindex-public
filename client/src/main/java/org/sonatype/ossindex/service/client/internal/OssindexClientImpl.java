@@ -104,7 +104,7 @@ public class OssindexClientImpl
   }
 
   /**
-   * @since ???
+   * @since 1.1.0
    */
   @Override
   public void close() throws Exception {

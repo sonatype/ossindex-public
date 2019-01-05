@@ -22,7 +22,7 @@ import org.sonatype.ossindex.service.api.componentreport.ComponentReport;
 /**
  * {@link PackageUrl} to {@link ComponentReport} cache.
  *
- * @since ???
+ * @since 1.1.0
  */
 public interface Cache
   extends AutoCloseable

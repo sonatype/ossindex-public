@@ -25,7 +25,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 /**
  * File locking helper.
  *
- * @since ???
+ * @since 1.1.0
  */
 public class FileLocker
 {

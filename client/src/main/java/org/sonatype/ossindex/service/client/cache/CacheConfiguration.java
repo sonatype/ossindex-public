@@ -15,7 +15,7 @@ package org.sonatype.ossindex.service.client.cache;
 /**
  * {@link Cache} configuration.
  *
- * @since ???
+ * @since 1.1.0
  */
 public interface CacheConfiguration
 {
