@@ -19,6 +19,7 @@ import java.io.RandomAccessFile;
 import java.io.Reader;
 import java.io.Writer;
 import java.nio.channels.Channels;
+import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -173,15 +174,35 @@ public class DirectoryCache
     {
       @Override
       public ComponentReport apply(final RandomAccessFile raf) throws IOException {
+        ComponentReport report = null;
+        boolean delete = false;
+
         if (isEntryStale(file)) {
-          expireEntry(file);
-          return null;
+          log.trace("Expiring entry: {}", file);
+          delete = true;
         }
         else {
-          // RAF close will clean up resources
-          Reader reader = new BufferedReader(Channels.newReader(raf.getChannel(), Charsets.UTF_8.name()));
-          return marshaller.unmarshal(reader, ComponentReport.class);
+          try {
+            // RAF close will clean up resources
+            Reader reader = new BufferedReader(Channels.newReader(raf.getChannel(), Charsets.UTF_8.name()));
+            report = marshaller.unmarshal(reader, ComponentReport.class);
+          }
+          catch (IOException e) {
+            // delete if we are unable to marshal
+            log.warn("Corrupt entry: {}", file, e);
+            delete = true;
+          }
         }
+
+        if (delete) {
+          // close file handle to allow deletion
+          raf.close();
+
+          // sanity check; file should exist but do not fail if missing
+          Files.deleteIfExists(file);
+        }
+
+        return report;
       }
     });
   }
@@ -200,14 +221,6 @@ public class DirectoryCache
     return age > expireAfter.getMillis();
   }
 
-  /**
-   * Expire given entry.
-   */
-  private void expireEntry(final Path file) throws IOException {
-    log.trace("Expiring entry: {}", file);
-    Files.delete(file);
-  }
-
   //
   // Storing
   //
@@ -218,18 +231,37 @@ public class DirectoryCache
   private void storeEntry(final ComponentReport report, final Path file) throws IOException {
     log.trace("Storing entry: {} -> {}", report, file);
 
-    // prepare directory structure and create files (needs to exist for locking)
+    // prepare directory structure
     Files.createDirectories(file.getParent());
-    Files.createFile(file);
+
+    // maybe create file; must exist for locking
+    try {
+      Files.createFile(file);
+    }
+    catch (FileAlreadyExistsException e) {
+      // ignore
+      log.trace("File already exists: {}", file, e);
+    }
 
     FileLocker.writeLock(file, new FileFunction<Void>()
     {
       @Override
       public Void apply(final RandomAccessFile raf) throws IOException {
-        // RAF close will clean up resources
-        Writer writer = new BufferedWriter(Channels.newWriter(raf.getChannel(), Charsets.UTF_8.name()));
-        marshaller.marshal(report, writer);
-        writer.flush();
+        try {
+          // RAF close will clean up resources
+          Writer writer = new BufferedWriter(Channels.newWriter(raf.getChannel(), Charsets.UTF_8.name()));
+          marshaller.marshal(report, writer);
+          writer.flush();
+        }
+        catch (IOException e) {
+          log.warn("Failed to store entry: {}", file, e);
+
+          // close file handle to allow deletion
+          raf.close();
+
+          // sanity check; file should exist but do not fail if missing
+          Files.deleteIfExists(file);
+        }
         return null;
       }
     });

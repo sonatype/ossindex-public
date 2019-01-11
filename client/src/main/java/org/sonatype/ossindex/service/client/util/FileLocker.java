@@ -62,8 +62,14 @@ public class FileLocker
         return function.apply(file);
       }
       finally {
-        lock.release();
-        log.trace("Unlocked: {}", path);
+        if (lock.isValid()) {
+          lock.release();
+          log.trace("Unlocked: {}", path);
+        }
+        else {
+          // this may happen normally if function closes the file
+          log.trace("Invalid: {}", path);
+        }
       }
     }
   }
