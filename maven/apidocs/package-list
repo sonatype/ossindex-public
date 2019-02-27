@@ -1,4 +1,5 @@
 org.sonatype.ossindex.service.api.componentreport
+org.sonatype.ossindex.service.api.cvss
 org.sonatype.ossindex.service.api.version
 org.sonatype.ossindex.service.client
 org.sonatype.ossindex.service.client.cache
