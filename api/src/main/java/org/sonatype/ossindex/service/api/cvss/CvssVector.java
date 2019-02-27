@@ -32,7 +32,7 @@ import static org.sonatype.ossindex.service.api.cvss.CvssMetric.UNKNOWN_GROUP;
 /**
  * CVSS vector.
  *
- * @since ???
+ * @since 1.2.0
  */
 public abstract class CvssVector
 {

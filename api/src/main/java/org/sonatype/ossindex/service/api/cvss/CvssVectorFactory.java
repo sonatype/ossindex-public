@@ -22,7 +22,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
  *
  * @see Cvss2Vector
  * @see Cvss3Vector
- * @since ???
+ * @since 1.2.0
  */
 public class CvssVectorFactory
 {

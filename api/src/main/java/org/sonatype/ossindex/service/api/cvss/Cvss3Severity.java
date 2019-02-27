@@ -17,7 +17,7 @@ import javax.annotation.Nullable;
 /**
  * CVSS version {@code 3.0} severity.
  *
- * @since ???
+ * @since 1.2.0
  */
 public enum Cvss3Severity
 {

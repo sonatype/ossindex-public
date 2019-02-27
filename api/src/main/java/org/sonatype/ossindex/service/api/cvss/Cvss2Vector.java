@@ -25,7 +25,7 @@ import static org.sonatype.ossindex.service.api.cvss.CvssMetric.builder;
  * CVSS version {@code 2.0} vector.
  *
  * @see <a href="https://www.first.org/cvss/v2/guide">CVSS 2.0 Guide</a>
- * @since ???
+ * @since 1.2.0
  */
 public class Cvss2Vector
     extends CvssVector

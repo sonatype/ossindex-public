@@ -27,7 +27,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 /**
  * CVSS metric.
  *
- * @since ???
+ * @since 1.2.0
  */
 public class CvssMetric
 {

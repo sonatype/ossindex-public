@@ -30,7 +30,7 @@ import static org.sonatype.ossindex.service.api.cvss.CvssMetric.builder;
  * CVSS version {@code 3.0} vector.
  *
  * @see <a href="https://www.first.org/cvss/specification-document">CVSS 3.0 Specification</a>
- * @since ???
+ * @since 1.2.0
  */
 public class Cvss3Vector
     extends CvssVector
