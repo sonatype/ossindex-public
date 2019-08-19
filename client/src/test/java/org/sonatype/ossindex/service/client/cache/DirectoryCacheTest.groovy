@@ -40,7 +40,8 @@ class DirectoryCacheTest
     underTest = new DirectoryCache(new GsonMarshaller(),
         new DirectoryCache.Configuration(
             baseDir: baseDir.toPath(),
-            expireAfter: Duration.standardSeconds(1)
+            // large expire window, will purge explicitly
+            expireAfter: Duration.standardHours(24)
         )
     )
   }
@@ -96,8 +97,7 @@ class DirectoryCacheTest
 
     displayDirectoryTree(baseDir)
 
-    // FIXME: this is likely to break periodically; consider revising test
-    Thread.sleep(2000)
+    underTest.purgeEntry(coordinates)
 
     underTest.getIfPresent(coordinates).with {
       assert it == null

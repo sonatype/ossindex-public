@@ -38,6 +38,7 @@ import org.sonatype.ossindex.service.client.util.FileLocker.FileFunction;
 import org.sonatype.ossindex.service.client.util.UserDataLocation;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.Charsets;
 import com.google.common.base.MoreObjects;
 import com.google.common.hash.Hashing;
@@ -265,6 +266,18 @@ public class DirectoryCache
         return null;
       }
     });
+  }
+
+  /**
+   * Purge entry for coordinates.
+   *
+   * @since ???
+   */
+  @VisibleForTesting
+  void purgeEntry(final PackageUrl coordinates) throws IOException {
+    Path file = entryFile(coordinates);
+    log.trace("Purge entry: {}", file);
+    Files.deleteIfExists(file);
   }
 
   //
