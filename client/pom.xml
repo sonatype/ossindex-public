@@ -83,6 +83,11 @@
       <artifactId>gson</artifactId>
     </dependency>
 
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-databind</artifactId>
+    </dependency>
+
     <!-- *NOT* using bom here to prevent client version from impacting service dependencies -->
 
     <dependency>
