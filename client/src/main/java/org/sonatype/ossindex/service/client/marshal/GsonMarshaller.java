@@ -25,10 +25,12 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
+import com.google.gson.JsonIOException;
 import com.google.gson.JsonParseException;
 import com.google.gson.JsonPrimitive;
 import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
+import com.google.gson.JsonSyntaxException;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
@@ -57,36 +59,57 @@ public class GsonMarshaller
   @Override
   public void marshal(final Object value, final Writer writer) throws IOException {
     checkNotNull(value);
-    gson.toJson(value, writer);
-    writer.flush();
+    try {
+      gson.toJson(value, writer);
+    } catch (JsonIOException e) {
+      throw new IOException(e);
+    } finally {
+      writer.flush();
+    }
   }
 
   @Override
-  public <T> T unmarshal(final String value, final Class<T> type) {
+  public <T> T unmarshal(final String value, final Class<T> type) throws IOException {
     checkNotNull(value);
     checkNotNull(type);
-    return gson.fromJson(value, type);
+    try {
+      return gson.fromJson(value, type);
+    } catch (JsonSyntaxException e) {
+      throw new IOException(e);
+    }
   }
 
   @Override
-  public <T> T unmarshal(final String value, final TypeToken<T> type) {
+  public <T> T unmarshal(final String value, final TypeToken<T> type) throws IOException {
     checkNotNull(value);
     checkNotNull(type);
-    return gson.fromJson(value, type.getType());
+    try {
+      return gson.fromJson(value, type.getType());
+    } catch (JsonSyntaxException e) {
+      throw new IOException(e);
+    }
   }
 
   @Override
   public <T> T unmarshal(final Reader reader, final Class<T> type) throws IOException {
     checkNotNull(reader);
     checkNotNull(type);
-    return gson.fromJson(reader, type);
+    try {
+      return gson.fromJson(reader, type);
+    } catch (JsonIOException | JsonSyntaxException e) {
+      throw new IOException(e);
+    }
   }
 
   @Override
   public <T> T unmarshal(final Reader reader, final TypeToken<T> type) throws IOException {
     checkNotNull(reader);
     checkNotNull(type);
-    return gson.fromJson(reader, type.getType());
+    try {
+      return gson.fromJson(reader, type.getType());
+    } catch (JsonIOException | JsonSyntaxException e) {
+      throw new IOException(e);
+    }
   }
 
   /**
