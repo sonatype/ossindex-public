@@ -32,7 +32,7 @@ public interface Marshaller
   /**
    * Marshal value to string.
    */
-  String marshal(Object value);
+  String marshal(Object value) throws IOException;
 
   /**
    * Marshal value to writer.
@@ -48,12 +48,12 @@ public interface Marshaller
   /**
    * Unmarshal value for type.
    */
-  <T> T unmarshal(String value, Class<T> type);
+  <T> T unmarshal(String value, Class<T> type) throws IOException;
 
   /**
    * Unmarshal value for type.
    */
-  <T> T unmarshal(String value, TypeToken<T> type);
+  <T> T unmarshal(String value, TypeToken<T> type) throws IOException;
 
   /**
    * Unmarshal value for type.
