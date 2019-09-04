@@ -49,44 +49,74 @@ public class GsonMarshaller
   }
 
   @Override
-  public String marshal(final Object value) {
+  public String marshal(final Object value) throws IOException {
     checkNotNull(value);
-    return gson.toJson(value);
+    try {
+      return gson.toJson(value);
+    }
+    catch (JsonParseException e) {
+      throw new IOException(e);
+    }
   }
 
   @Override
   public void marshal(final Object value, final Writer writer) throws IOException {
     checkNotNull(value);
-    gson.toJson(value, writer);
-    writer.flush();
+    try {
+      gson.toJson(value, writer);
+      writer.flush();
+    }
+    catch (JsonParseException e) {
+      throw new IOException(e);
+    }
   }
 
   @Override
-  public <T> T unmarshal(final String value, final Class<T> type) {
+  public <T> T unmarshal(final String value, final Class<T> type) throws IOException {
     checkNotNull(value);
     checkNotNull(type);
-    return gson.fromJson(value, type);
+    try {
+      return gson.fromJson(value, type);
+    }
+    catch (JsonParseException e) {
+      throw new IOException(e);
+    }
   }
 
   @Override
-  public <T> T unmarshal(final String value, final TypeToken<T> type) {
+  public <T> T unmarshal(final String value, final TypeToken<T> type) throws IOException {
     checkNotNull(value);
     checkNotNull(type);
-    return gson.fromJson(value, type.getType());
+    try {
+      return gson.fromJson(value, type.getType());
+    }
+    catch (JsonParseException e) {
+      throw new IOException(e);
+    }
   }
 
   @Override
   public <T> T unmarshal(final Reader reader, final Class<T> type) throws IOException {
     checkNotNull(reader);
     checkNotNull(type);
-    return gson.fromJson(reader, type);
+    try {
+      return gson.fromJson(reader, type);
+    }
+    catch (JsonParseException e) {
+      throw new IOException(e);
+    }
   }
 
   @Override
   public <T> T unmarshal(final Reader reader, final TypeToken<T> type) throws IOException {
     checkNotNull(reader);
     checkNotNull(type);
-    return gson.fromJson(reader, type.getType());
+    try {
+      return gson.fromJson(reader, type.getType());
+    }
+    catch (JsonParseException e) {
+      throw new IOException(e);
+    }
   }
 
   /**
