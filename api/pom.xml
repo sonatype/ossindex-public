@@ -86,8 +86,8 @@
     </dependency>
 
     <dependency>
-      <groupId>org.sonatype.goodies</groupId>
-      <artifactId>goodies-testsupport</artifactId>
+      <groupId>org.sonatype.goodies.dropwizard</groupId>
+      <artifactId>dropwizard-support-testbase</artifactId>
       <scope>test</scope>
     </dependency>
 
