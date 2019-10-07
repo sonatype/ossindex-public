@@ -271,7 +271,7 @@ public class DirectoryCache
   /**
    * Purge entry for coordinates.
    *
-   * @since ???
+   * @since 1.3.0
    */
   @VisibleForTesting
   void purgeEntry(final PackageUrl coordinates) throws IOException {
