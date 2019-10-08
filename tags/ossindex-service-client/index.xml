@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Ossindex Service Client on Sonatype OSS Index: Public</title>
+    <title>ossindex-service-client on OSS Index: Public</title>
     <link>https://sonatype.github.io/ossindex-public/tags/ossindex-service-client/</link>
-    <description>Recent content in Ossindex Service Client on Sonatype OSS Index: Public</description>
+    <description>Recent content in ossindex-service-client on OSS Index: Public</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     
@@ -18,7 +18,7 @@
       <guid>https://sonatype.github.io/ossindex-public/client/</guid>
       <description>Provides a simple Java client to communicate with Sonatype OSS Index.
 Dependency To use from Apache Maven include dependency:
-&amp;lt;dependencyManagement&amp;gt; &amp;lt;dependencies&amp;gt; &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.sonatype.ossindex&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;ossindex-service-client&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;1.2.0&amp;lt;/version&amp;gt; &amp;lt;/dependency&amp;gt; &amp;lt;/dependencies&amp;gt; &amp;lt;/dependencyManagement&amp;gt;  &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.sonatype.ossindex&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;ossindex-service-client&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;1.2.0&amp;lt;/version&amp;gt; &amp;lt;/dependency&amp;gt;   Transports A few options for different transports are provided.
+&amp;lt;dependencyManagement&amp;gt; &amp;lt;dependencies&amp;gt; &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.sonatype.ossindex&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;ossindex-service-client&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;1.3.0&amp;lt;/version&amp;gt; &amp;lt;/dependency&amp;gt; &amp;lt;/dependencies&amp;gt; &amp;lt;/dependencyManagement&amp;gt;  &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.sonatype.ossindex&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;ossindex-service-client&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;1.3.0&amp;lt;/version&amp;gt; &amp;lt;/dependency&amp;gt;   Transports A few options for different transports are provided.
 HttpUrlConnectionTransport The HttpUrlConnectionTransport makes use of standard JRE HttpUrlConnection.
 HttpClientTransport The HttpClientTransport makes use of Apache HttpClient.
 Marshalling The default marshalling library used is Google Gson.</description>

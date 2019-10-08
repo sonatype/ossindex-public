@@ -11,12 +11,11 @@
   </url>
   
   <url>
-    <loc>https://sonatype.github.io/ossindex-public/categories/client/</loc>
-    <priority>0</priority>
+    <loc>https://sonatype.github.io/ossindex-public/client/</loc>
   </url>
   
   <url>
-    <loc>https://sonatype.github.io/ossindex-public/client/</loc>
+    <loc>https://sonatype.github.io/ossindex-public/categories/client/</loc>
   </url>
   
   <url>
@@ -25,7 +24,6 @@
   
   <url>
     <loc>https://sonatype.github.io/ossindex-public/categories/java/</loc>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -33,8 +31,11 @@
   </url>
   
   <url>
+    <loc>https://sonatype.github.io/ossindex-public/</loc>
+  </url>
+  
+  <url>
     <loc>https://sonatype.github.io/ossindex-public/tags/ossindex-service-client/</loc>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -44,10 +45,6 @@
   
   <url>
     <loc>https://sonatype.github.io/ossindex-public/tags/</loc>
-  </url>
-  
-  <url>
-    <loc>https://sonatype.github.io/ossindex-public/</loc>
   </url>
   
 </urlset>
