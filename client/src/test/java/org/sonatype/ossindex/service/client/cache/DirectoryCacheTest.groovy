@@ -17,23 +17,16 @@ import org.sonatype.goodies.testsupport.TestSupport
 import org.sonatype.ossindex.service.api.componentreport.ComponentReport
 import org.sonatype.ossindex.service.api.componentreport.ComponentReportVulnerability
 import org.sonatype.ossindex.service.client.marshal.GsonMarshaller
-import org.sonatype.ossindex.service.client.marshal.JacksonMarshaller
-import org.sonatype.ossindex.service.client.marshal.Marshaller
 
 import com.google.common.io.Files
 import org.joda.time.Duration
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
-import org.junit.runner.RunWith
-import org.junit.runners.Parameterized
-import org.junit.runners.Parameterized.Parameter
-import org.junit.runners.Parameterized.Parameters
 
 /**
  * {@link DirectoryCache} tests.
  */
-@RunWith(Parameterized.class)
 class DirectoryCacheTest
     extends TestSupport
 {
@@ -41,21 +34,10 @@ class DirectoryCacheTest
 
   DirectoryCache underTest
 
-  @Parameters(name = "marshaller = {0}")
-  static Collection<Object[]> data() {
-    return [
-        [new GsonMarshaller()] as Object[],
-        [new JacksonMarshaller()] as Object[]
-    ]
-  }
-
-  @Parameter
-  public /* field */ Marshaller marshaller
-
   @Before
   void setUp() {
     baseDir = util.createTempDir('cache-')
-    underTest = new DirectoryCache(marshaller,
+    underTest = new DirectoryCache(new GsonMarshaller(),
         new DirectoryCache.Configuration(
             baseDir: baseDir.toPath(),
             // large expire window, will purge explicitly
