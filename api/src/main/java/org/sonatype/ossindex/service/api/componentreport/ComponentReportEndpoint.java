@@ -15,6 +15,7 @@ package org.sonatype.ossindex.service.api.componentreport;
 import java.util.List;
 
 import javax.ws.rs.Consumes;
+import javax.ws.rs.Encoded;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -60,7 +61,7 @@ public interface ComponentReportEndpoint
       @ApiResponse(code = 429, message = "Too many requests")
   })
   @SuppressWarnings("RestParamTypeInspection")
-  ComponentReport get(@PathParam("coordinates") @ApiParam("Coordinates as package-url") PackageUrl coordinates);
+  ComponentReport get(@Encoded @PathParam("coordinates") @ApiParam("Coordinates as package-url") PackageUrl coordinates);
 
   @POST
   @Consumes({REQUEST_V1_JSON, APPLICATION_JSON})
