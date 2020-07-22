@@ -26,6 +26,7 @@ import org.apache.http.StatusLine;
 import org.apache.http.auth.AuthScope;
 import org.apache.http.auth.UsernamePasswordCredentials;
 import org.apache.http.client.CredentialsProvider;
+import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.ContentType;
@@ -134,6 +135,17 @@ public class HttpClientTransport
         );
         log.debug("Configured http-proxy authentication");
       }
+    }
+
+    // maybe configure timeout settings
+    TimeoutConfiguration timeoutConfiguration = configuration.getTimeoutConfiguration();
+    if (timeoutConfiguration != null) {
+      RequestConfig requestConfig = RequestConfig.custom()
+          .setConnectTimeout(timeoutConfiguration.getConnectTimeout())
+          .setConnectionRequestTimeout(timeoutConfiguration.getConnectionRequestTimeout())
+          .setSocketTimeout(timeoutConfiguration.getSocketTimeout())
+          .build();
+      builder.setDefaultRequestConfig(requestConfig);
     }
 
     return builder.build();
