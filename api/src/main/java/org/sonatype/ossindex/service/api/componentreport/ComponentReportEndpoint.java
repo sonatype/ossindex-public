@@ -53,7 +53,7 @@ public interface ComponentReportEndpoint
   @GET
   @Path("{coordinates:.*}")
   @Produces({REPORT_V1_JSON, APPLICATION_JSON})
-  @ApiOperation(value = "Request vulnerability report for component")
+  @ApiOperation(value = "Request vulnerability report for component", hidden = true)
   @ApiResponses({
       @ApiResponse(code = 200, message = "Vulnerability report for component"),
       @ApiResponse(code = 404, message = "Component not found"),
