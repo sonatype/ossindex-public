@@ -55,7 +55,7 @@
 
   <ciManagement>
     <system>jenkins</system>
-    <url>https://jenkins.ci.sonatype.dev/job/ossindex/job/ossindex-service</url>
+    <url>https://jenkins.ci.sonatype.dev/job/ossindex/job/ossindex-public</url>
   </ciManagement>
 
   <distributionManagement>
@@ -126,6 +126,7 @@
           <groupId>com.mycila</groupId>
           <artifactId>license-maven-plugin</artifactId>
           <configuration>
+            <header>header.txt</header>
             <includes combine.children="append">
               <include>**/*.ftl</include>
             </includes>
