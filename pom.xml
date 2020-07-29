@@ -127,16 +127,6 @@
           <artifactId>license-maven-plugin</artifactId>
           <configuration>
             <header>header.txt</header>
-            <includes combine.children="append">
-              <include>**/*.ftl</include>
-            </includes>
-            <excludes combine.children="append">
-              <exclude>src/site/hugo/**</exclude>
-              <exclude>*.sh</exclude>
-              <exclude>*.cmd</exclude>
-              <exclude>private/**</exclude>
-              <exclude>references/**</exclude>
-            </excludes>
           </configuration>
         </plugin>
 
