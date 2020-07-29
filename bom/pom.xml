@@ -20,7 +20,7 @@
   <parent>
     <groupId>org.sonatype.ossindex</groupId>
     <artifactId>ossindex-service</artifactId>
-    <version>1-SNAPSHOT</version>
+    <version>1.5.0-SNAPSHOT</version>
   </parent>
 
   <artifactId>ossindex-service-bom</artifactId>
@@ -113,7 +113,7 @@
       <dependency>
         <groupId>org.sonatype.goodies.dropwizard</groupId>
         <artifactId>dropwizard-support-testbase</artifactId>
-        <version>1.2.0</version>
+        <version>1.3.0</version>
       </dependency>
 
       <dependency>
@@ -133,13 +133,13 @@
       <dependency>
         <groupId>org.sonatype.ossindex</groupId>
         <artifactId>ossindex-service-api</artifactId>
-        <version>1-SNAPSHOT</version>
+        <version>1.5.0-SNAPSHOT</version>
       </dependency>
 
       <dependency>
         <groupId>org.sonatype.ossindex</groupId>
         <artifactId>ossindex-service-client</artifactId>
-        <version>1-SNAPSHOT</version>
+        <version>1.5.0-SNAPSHOT</version>
       </dependency>
 
     </dependencies>

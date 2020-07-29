@@ -19,6 +19,7 @@ import javax.annotation.Nullable;
 import org.sonatype.ossindex.service.client.cache.CacheConfiguration;
 import org.sonatype.ossindex.service.client.transport.AuthConfiguration;
 import org.sonatype.ossindex.service.client.transport.ProxyConfiguration;
+import org.sonatype.ossindex.service.client.transport.TimeoutConfiguration;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -58,7 +59,11 @@ public class OssindexClientConfiguration
   @Nullable
   @JsonProperty("cache")
   private CacheConfiguration cacheConfiguration;
-  
+
+  @Nullable
+  @JsonProperty("timeout")
+  private TimeoutConfiguration timeoutConfiguration;
+
   /**
    * Returns the base URL for the OSS Index service.
    */
@@ -126,7 +131,7 @@ public class OssindexClientConfiguration
   }
 
   /**
-   * Returns the cache cache configuration; or {@literal null} if not configured.
+   * Returns the cache configuration; or {@literal null} if not configured.
    */
   @Nullable
   public CacheConfiguration getCacheConfiguration() {
@@ -138,5 +143,20 @@ public class OssindexClientConfiguration
    */
   public void setCacheConfiguration(@Nullable final CacheConfiguration cacheConfiguration) {
     this.cacheConfiguration = cacheConfiguration;
+  }
+
+  /**
+   * Returns the timeout configuration; or {@literal null} if not configured.
+   */
+  @Nullable
+  public TimeoutConfiguration getTimeoutConfiguration() {
+    return timeoutConfiguration;
+  }
+
+  /**
+   * Set the timout configuration; or {@literal null} for default.
+   */
+  public void setTimeoutConfiguration(@Nullable final TimeoutConfiguration timeoutConfiguration) {
+    this.timeoutConfiguration = timeoutConfiguration;
   }
 }

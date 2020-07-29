@@ -123,6 +123,18 @@ public class HttpUrlConnectionTransport
         connection = (HttpURLConnection) url.openConnection();
       }
 
+      TimeoutConfiguration timeoutConfiguration = configuration.getTimeoutConfiguration();
+      if (timeoutConfiguration != null) {
+        int connectTimeout = timeoutConfiguration.getConnectTimeout();
+        if (connectTimeout > 0) {
+          connection.setConnectTimeout(connectTimeout);
+        }
+        int socketTimeout = timeoutConfiguration.getSocketTimeout();
+        if (socketTimeout > 0) {
+          connection.setReadTimeout(socketTimeout);
+        }
+      }
+
       connection.setRequestProperty(USER_AGENT, userAgent.get());
 
       // maybe add authorization headers if configured
