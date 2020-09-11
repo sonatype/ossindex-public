@@ -20,7 +20,7 @@
   <parent>
     <groupId>org.sonatype.ossindex</groupId>
     <artifactId>ossindex-service</artifactId>
-    <version>1.5.0-SNAPSHOT</version>
+    <version>1.5.0</version>
   </parent>
 
   <artifactId>ossindex-service-api</artifactId>
@@ -32,7 +32,7 @@
       <dependency>
         <groupId>org.sonatype.ossindex</groupId>
         <artifactId>ossindex-service-bom</artifactId>
-        <version>1.5.0-SNAPSHOT</version>
+        <version>1.5.0</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
