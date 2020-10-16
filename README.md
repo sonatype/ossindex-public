@@ -20,6 +20,8 @@
 
 Provides API and clients for [Sonatype OSS Index](https://ossindex.sonatype.org/).
 
+See [Javadocs](https://sonatype.github.io/ossindex-public/) for API and client reference.
+
 ## Using the client
 
 To add a dependency on the OSS Index client, use the following:
@@ -34,8 +36,8 @@ To add a dependency on the OSS Index client, use the following:
 
 Two options for transports are provided:
 
-* [HttpUrlConnectionTransport](https://sonatype.github.io/ossindex-public/apidocs/org/sonatype/ossindex/service/client/transport/HttpUrlConnectionTransport.html) makes use of standard JRE `HttpUrlConnection`
-* [HttpClientTransport](https://sonatype.github.io/ossindex-public/apidocs/org/sonatype/ossindex/service/client/transport/HttpClientTransport.html) makes use of [Apache HttpClient](https://hc.apache.org/httpcomponents-client-ga/)
+* [HttpUrlConnectionTransport](https://sonatype.github.io/ossindex-public/org/sonatype/ossindex/service/client/transport/HttpUrlConnectionTransport.html) makes use of standard JRE `HttpUrlConnection`
+* [HttpClientTransport](https://sonatype.github.io/ossindex-public/org/sonatype/ossindex/service/client/transport/HttpClientTransport.html) makes use of [Apache HttpClient](https://hc.apache.org/httpcomponents-client-ga/)
 
 ## Building
 
