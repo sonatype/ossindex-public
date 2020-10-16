@@ -140,9 +140,6 @@
               <artifactId>dionysus-hugo-theme</artifactId>
               <version>${dionysus.version}</version>
             </theme>
-            <mavenOptions>
-              <option>-P!include-private</option>
-            </mavenOptions>
             <mavenGoals>
               <goal>javadoc:aggregate</goal>
               <goal>jxr:aggregate</goal>
@@ -256,18 +253,6 @@
 
   <profiles>
     <profile>
-      <id>include-private</id>
-      <activation>
-        <file>
-          <exists>private/pom.xml</exists>
-        </file>
-      </activation>
-      <modules>
-        <module>private</module>
-      </modules>
-    </profile>
-
-    <profile>
       <id>it</id>
       <activation>
         <property>
@@ -275,7 +260,6 @@
           <value>true</value>
         </property>
       </activation>
-
       <build>
         <plugins>
           <plugin>
