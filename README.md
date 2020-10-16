@@ -18,7 +18,24 @@
 
 ![maven-central](https://img.shields.io/maven-central/v/org.sonatype.ossindex/ossindex-service.svg)
 
-Provides api and clients for [Sonatype OSS Index](https://ossindex.sonatype.org/).
+Provides API and clients for [Sonatype OSS Index](https://ossindex.sonatype.org/).
+
+## Using the client
+
+To add a dependency on the OSS Index client, use the following:
+
+```xml
+<dependency>
+  <groupId>org.sonatype.ossindex</groupId>
+  <artifactId>ossindex-service-client</artifactId>
+  <version>1.5.0</version>
+</dependency>
+```
+
+Two options for transports are provided:
+
+* [HttpUrlConnectionTransport](https://sonatype.github.io/ossindex-public/apidocs/org/sonatype/ossindex/service/client/transport/HttpUrlConnectionTransport.html) makes use of standard JRE `HttpUrlConnection`
+* [HttpClientTransport](https://sonatype.github.io/ossindex-public/apidocs/org/sonatype/ossindex/service/client/transport/HttpClientTransport.html) makes use of [Apache HttpClient](https://hc.apache.org/httpcomponents-client-ga/)
 
 ## Building
 
@@ -30,3 +47,9 @@ Provides api and clients for [Sonatype OSS Index](https://ossindex.sonatype.org/
 ### Build
 
     ./mvnw clean install
+
+### Publish the docs
+
+Checkout the release branch, and then:
+
+    ./mvnw clean javadoc:aggregate scm-publish:publish-scm -Pdocs

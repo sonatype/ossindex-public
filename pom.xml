@@ -69,8 +69,6 @@
     <maven.compiler.source>1.7</maven.compiler.source>
     <maven.compiler.target>1.7</maven.compiler.target>
 
-    <dionysus.version>1.0.3</dionysus.version>
-
     <build.notes>t:local, u:${user.name}</build.notes>
   </properties>
 
@@ -115,41 +113,26 @@
 
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-scm-publish-plugin</artifactId>
+          <version>3.0.0</version>
+          <configuration>
+            <content>${project.reporting.outputDirectory}</content>
+            <include>/apidocs</include>
+            <scmBranch>gh-pages</scmBranch>
+          </configuration>
+        </plugin>
+
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-invoker-plugin</artifactId>
           <version>3.1.0</version>
         </plugin>
 
-        <!--
-        Use headers.sh script.
-        -->
         <plugin>
           <groupId>com.mycila</groupId>
           <artifactId>license-maven-plugin</artifactId>
           <configuration>
             <header>header.txt</header>
-          </configuration>
-        </plugin>
-
-        <plugin>
-          <groupId>org.sonatype.goodies.dionysus</groupId>
-          <artifactId>dionysus-maven-plugin</artifactId>
-          <version>${dionysus.version}</version>
-          <configuration>
-            <theme>
-              <groupId>org.sonatype.goodies.dionysus</groupId>
-              <artifactId>dionysus-hugo-theme</artifactId>
-              <version>${dionysus.version}</version>
-            </theme>
-            <mavenGoals>
-              <goal>javadoc:aggregate</goal>
-              <goal>jxr:aggregate</goal>
-            </mavenGoals>
-            <generators>
-              <mavenLicenses/>
-              <mavenModules/>
-              <mavenPom/>
-              <mavenPlugin/>
-            </generators>
           </configuration>
         </plugin>
       </plugins>
@@ -279,7 +262,7 @@
     </profile>
 
     <profile>
-      <id>dionysus</id>
+      <id>docs</id>
       <build>
         <pluginManagement>
           <plugins>
