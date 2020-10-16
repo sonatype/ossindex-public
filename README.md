@@ -30,7 +30,7 @@ To add a dependency on the OSS Index client, use the following:
 <dependency>
   <groupId>org.sonatype.ossindex</groupId>
   <artifactId>ossindex-service-client</artifactId>
-  <version>1.5.0</version>
+  <version>1.6.0</version>
 </dependency>
 ```
 
