@@ -22,7 +22,7 @@ to see if this has been previously reported.
 
 ## How to report
 
-Please email reports regarding security related issues you find to [mailto:security@sonatype.com](security@sonatype.com).
+Please email reports regarding security related issues you find to [security@sonatype.com](mailto:security@sonatype.com).
 
 Use our public key below to keep your message safe.
 
