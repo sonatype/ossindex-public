@@ -56,11 +56,9 @@
       <optional>true</optional>
     </dependency>
 
-    <!-- Guava 20.x is the latest which supports Java 1.7 -->
     <dependency>
       <groupId>com.google.guava</groupId>
       <artifactId>guava</artifactId>
-      <version>20.0</version>
     </dependency>
 
     <dependency>
