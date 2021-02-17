@@ -58,15 +58,12 @@
         <version>3.0.2</version>
       </dependency>
 
-      <!-- NOTE: guava 20.0 is also used by client+api due to it being the last version supporting Java 7 -->
-
+      <!-- NOTE: android version is used due to it supporting Java 7 -->
       <dependency>
         <groupId>com.google.guava</groupId>
         <artifactId>guava</artifactId>
-        <version>28.1-jre</version>
+        <version>29.0-android</version>
       </dependency>
-
-      <!-- NOTE: newer versions have incompatible byte-code -->
 
       <dependency>
         <groupId>com.google.code.gson</groupId>
