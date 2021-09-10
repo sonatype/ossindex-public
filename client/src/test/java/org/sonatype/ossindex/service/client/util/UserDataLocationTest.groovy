@@ -70,7 +70,7 @@ class UserDataLocationTest
   }
 
   @Test
-  void 'windows location; modern'() {
+  void 'windows location, modern'() {
     osType.set(OsType.WINDOWS)
     env.put(UserDataLocation.LOCALAPPDATA, 'WINDOWS_BASEDIR')
     underTest.get().with {
@@ -79,7 +79,7 @@ class UserDataLocationTest
   }
 
   @Test
-  void 'windows location; legacy'() {
+  void 'windows location, legacy'() {
     osType.set(OsType.WINDOWS)
     env.put(UserDataLocation.APPDATA, 'WINDOWS_BASEDIR')
     underTest.get().with {
@@ -88,7 +88,7 @@ class UserDataLocationTest
   }
 
   @Test
-  void 'windows location; fallback'() {
+  void 'windows location, fallback'() {
     osType.set(OsType.WINDOWS)
     underTest.get().with {
       assert it.toString() == path('USER_HOME','.foo-bar')
