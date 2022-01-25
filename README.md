@@ -52,6 +52,12 @@ Two options for transports are provided:
 
 ### Publish the docs
 
-Checkout the release branch, and then:
+Checkout the release tag first, then:
 
-    ./mvnw clean javadoc:aggregate scm-publish:publish-scm -Pdocs
+1. To do a dry run:
+
+        ./mvnw clean javadoc:aggregate scm-publish:publish-scm -Pdocs -Dscmpublish.dryRun=true
+
+1. To publish:
+
+        ./mvnw clean javadoc:aggregate scm-publish:publish-scm -Pdocs
