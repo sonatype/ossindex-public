@@ -116,8 +116,7 @@
           <artifactId>maven-scm-publish-plugin</artifactId>
           <version>3.0.0</version>
           <configuration>
-            <content>${project.reporting.outputDirectory}</content>
-            <include>/apidocs</include>
+            <content>${project.reporting.outputDirectory}/apidocs</content>
             <scmBranch>gh-pages</scmBranch>
           </configuration>
         </plugin>
