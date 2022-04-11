@@ -68,6 +68,11 @@ public class ComponentReport
   @XmlElement(name="vulnerability")
   private List<ComponentReportVulnerability> vulnerabilities;
 
+  @ApiModelProperty("Aggregated CVSS score")
+  @JsonProperty
+  @XmlElement(name="aggregatedCvssScore")
+  private float aggregatedCvssScore;
+
   public PackageUrl getCoordinates() {
     return coordinates;
   }
@@ -103,6 +108,14 @@ public class ComponentReport
     this.vulnerabilities = vulnerabilities;
   }
 
+  public Float getAggregatedCvssScore() {
+    return aggregatedCvssScore;
+  }
+
+  public void setAggregatedCvssScore(float aggregatedCvssScore) {
+    this.aggregatedCvssScore = aggregatedCvssScore;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -115,12 +128,13 @@ public class ComponentReport
     return Objects.equals(coordinates, that.coordinates) &&
         Objects.equals(description, that.description) &&
         Objects.equals(reference, that.reference) &&
+        Objects.equals(aggregatedCvssScore, that.aggregatedCvssScore) &&
         Objects.equals(vulnerabilities, that.vulnerabilities);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(coordinates, description, reference, vulnerabilities);
+    return Objects.hash(coordinates, description, reference, aggregatedCvssScore, vulnerabilities);
   }
 
   @Override
