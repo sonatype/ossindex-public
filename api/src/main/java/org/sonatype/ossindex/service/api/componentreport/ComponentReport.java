@@ -68,10 +68,10 @@ public class ComponentReport
   @XmlElement(name="vulnerability")
   private List<ComponentReportVulnerability> vulnerabilities;
 
-  @ApiModelProperty("Aggregated CVSS score")
+  @ApiModelProperty("Sonatype Ossi Score")
   @JsonProperty
-  @XmlElement(name="aggregatedCvssScore")
-  private float aggregatedCvssScore;
+  @XmlElement(name="sonatype:Ossi:Score")
+  private float sonatypeOssiScore;
 
   public PackageUrl getCoordinates() {
     return coordinates;
@@ -108,12 +108,12 @@ public class ComponentReport
     this.vulnerabilities = vulnerabilities;
   }
 
-  public Float getAggregatedCvssScore() {
-    return aggregatedCvssScore;
+  public Float getSonatypeOssiScore() {
+    return sonatypeOssiScore;
   }
 
-  public void setAggregatedCvssScore(float aggregatedCvssScore) {
-    this.aggregatedCvssScore = aggregatedCvssScore;
+  public void setSonatypeOssiScore(float sonatypeOssiScore) {
+    this.sonatypeOssiScore = sonatypeOssiScore;
   }
 
   @Override
@@ -128,13 +128,13 @@ public class ComponentReport
     return Objects.equals(coordinates, that.coordinates) &&
         Objects.equals(description, that.description) &&
         Objects.equals(reference, that.reference) &&
-        Objects.equals(aggregatedCvssScore, that.aggregatedCvssScore) &&
+        Objects.equals(sonatypeOssiScore, that.sonatypeOssiScore) &&
         Objects.equals(vulnerabilities, that.vulnerabilities);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(coordinates, description, reference, aggregatedCvssScore, vulnerabilities);
+    return Objects.hash(coordinates, description, reference, sonatypeOssiScore, vulnerabilities);
   }
 
   @Override
