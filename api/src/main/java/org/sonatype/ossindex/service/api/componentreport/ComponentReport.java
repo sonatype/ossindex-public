@@ -70,7 +70,7 @@ public class ComponentReport
 
   @ApiModelProperty("Sonatype Ossi Score")
   @JsonProperty
-  @XmlElement(name="sonatype:ossi:socre")
+  @XmlElement(name="sonatype:ossi:score")
   private float sonatypeOssiScore;
 
   public PackageUrl getCoordinates() {
