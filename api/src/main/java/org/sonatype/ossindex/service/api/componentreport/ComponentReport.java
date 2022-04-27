@@ -68,6 +68,11 @@ public class ComponentReport
   @XmlElement(name="vulnerability")
   private List<ComponentReportVulnerability> vulnerabilities;
 
+  @ApiModelProperty("Sonatype Ossi Score")
+  @JsonProperty
+  @XmlElement(name="sonatype:ossi:score")
+  private float sonatypeOssiScore;
+
   public PackageUrl getCoordinates() {
     return coordinates;
   }
@@ -103,6 +108,14 @@ public class ComponentReport
     this.vulnerabilities = vulnerabilities;
   }
 
+  public Float getSonatypeOssiScore() {
+    return sonatypeOssiScore;
+  }
+
+  public void setSonatypeOssiScore(float sonatypeOssiScore) {
+    this.sonatypeOssiScore = sonatypeOssiScore;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -115,12 +128,13 @@ public class ComponentReport
     return Objects.equals(coordinates, that.coordinates) &&
         Objects.equals(description, that.description) &&
         Objects.equals(reference, that.reference) &&
+        (sonatypeOssiScore == that.sonatypeOssiScore) &&
         Objects.equals(vulnerabilities, that.vulnerabilities);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(coordinates, description, reference, vulnerabilities);
+    return Objects.hash(coordinates, description, reference, sonatypeOssiScore, vulnerabilities);
   }
 
   @Override
