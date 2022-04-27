@@ -81,6 +81,11 @@
       <artifactId>gson</artifactId>
     </dependency>
 
+    <dependency>
+      <groupId>javax.xml.bind</groupId>
+      <artifactId>jaxb-api</artifactId>
+    </dependency>
+
     <!-- *NOT* using bom here to prevent client version from impacting service dependencies -->
 
     <dependency>
@@ -134,7 +139,7 @@
             <configuration>
               <rules>
                 <byteCodeRule implementation="org.owasp.maven.enforcer.rule.ClassFileFormatRule">
-                  <supportedClassFileFormat>51</supportedClassFileFormat>
+                  <supportedClassFileFormat>53</supportedClassFileFormat>
                 </byteCodeRule>
               </rules>
             </configuration>
