@@ -128,7 +128,7 @@ public class ComponentReport
     return Objects.equals(coordinates, that.coordinates) &&
         Objects.equals(description, that.description) &&
         Objects.equals(reference, that.reference) &&
-        Objects.equals(sonatypeOssiScore, that.sonatypeOssiScore) &&
+        (sonatypeOssiScore == that.sonatypeOssiScore) &&
         Objects.equals(vulnerabilities, that.vulnerabilities);
   }
 
